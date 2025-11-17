@@ -1,4 +1,5 @@
 import { data } from "./data.js";
+import { OrchidPage } from "./orchids.js";
 
 const homeH1 = document.createElement("h1");
 homeH1.textContent = "Géneros";
@@ -22,8 +23,9 @@ data.genus.forEach((item) => {
 });
 
 function init() {
-  document.body.appendChild(homeH1);
-  document.body.appendChild(homeUl);
+  // document.body.appendChild(homeH1);
+  // document.body.appendChild(homeUl);
+  OrchidPage();
 }
 
 init();
