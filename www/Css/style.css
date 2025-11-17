@@ -1,0 +1,363 @@
+:root {
+    --root-color: #228b22; /*ForestGreen*/
+    --root-secondary-color: #00fa9a; /*MediumSpringGreen*/
+    --root-background-color: #f0fff0; /*HoneyDew*/
+    --root-secondary-background-color: #eee;
+    --root-font-size: 1rem;
+    --root-icon-size: calc(10 * var(--root-font-size));
+    --root-space: var(--root-font-size);
+    --root-half-space: calc(var(--root-space) / 2);
+    --root-fourth-space: calc(var(--root-space) / 4);
+    --root-double-space: calc(var(--root-space) * 2);
+    --root-border-radius: var(--root-space);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 2 * var(--root-space));
+    width: calc(100vw - 2 * var(--root-space));
+    margin: var(--root-space);
+    background-color: var(--root-secondary-background-color);
+    font-family: Roboto, Verdana, Helvetica, sans-serif;
+    font-size: var(--root-font-size);
+}
+
+footer {
+    width: calc(100% - 2 * var(--root-space));
+    margin-top: auto;
+    padding: var(--root-space);
+    color: var(--root-background-color);
+    background-color: var(--root-color);
+    border-radius: var(--root-border-radius);
+    text-align: center;
+}
+
+.name {
+    margin: 0;
+    padding: var(--root-double-space);
+    color: var(--root-background-color);
+    background-color: var(--root-color);
+    border-radius: var(--root-border-radius) var(--root-border-radius) 0 0;
+}
+
+.genus-list,
+.orchid-list,
+.orchid-info,
+.author,
+.icon-credits {
+    margin: 0;
+    padding: var(--root-space);
+    color: var(--root-color);
+    background-color: var(--root-background-color);
+}
+
+.genus-list,
+.orchid-list,
+.orchid-info,
+.icon-credits {
+    border-radius: 0 0 var(--root-border-radius) var(--root-border-radius);
+}
+
+.genus-list,
+.orchid-list {
+    padding: var(--root-double-space);
+    list-style-type: "\2698";
+}
+
+.orchid-list li::marker {
+    color: var(--root-secondary-color);
+    font-size: calc(1.5 * var(--root-font-size));
+}
+
+.about-link,
+.genus-link,
+.orchid-link,
+.icon-credit-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.genus-list {
+    text-align: center;
+}
+
+.genus-item {
+    display: inline;
+    padding: calc(var(--root-icon-size) / 10);
+    font-size: 0;
+}
+
+.genus-link {
+    display: inline-block;
+    width: var(--root-icon-size);
+    height: var(--root-icon-size);
+    border: calc(0.2 * var(--root-font-size)) solid var(--root-color);
+    border-radius: var(--root-border-radius);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: var(--root-icon-size);
+    box-shadow: var(--root-fourth-space) var(--root-fourth-space) var(--root-fourth-space) var(--root-color);
+}
+
+#bulbophyllum {
+    background-image: url("/www/images/icons/bulbophyllum.png");
+}
+#cattleya {
+    background-image: url("/www/images/icons/cattleya.png");
+}
+#cymbidium {
+    background-image: url("/www/images/icons/cymbidium.png");
+}
+#paphiopedilum {
+    background-image: url("/www/images/icons/paphiopedilum.png");
+}
+#phalaenopsis {
+    background-image: url("/www/images/icons/phalaenopsis.png");
+}
+
+.orchid {
+    padding: var(--root-fourth-space);
+    font-weight: bold;
+}
+
+.orchid-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.characteristic {
+    padding: var(--root-space) 0;
+    line-height: calc(2 * var(--root-font-size));
+}
+
+.label {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.type,
+.luminosity,
+.temperature,
+.humidity,
+.size {
+    display: inline-block;
+    padding-right: calc(var(--root-half-space) + var(--root-double-space));
+    background-repeat: no-repeat;
+    background-position: 100% 50%;
+    background-size: var(--root-double-space);
+}
+
+.orchid-photo {
+    display: block;
+    max-width: 50vw;
+    max-height: calc((6 * (2 * var(--root-space) + (2 * var(--root-font-size)))));
+}
+
+.type-species {
+    background-image: url("/www/images/characteristic/type-species.png");
+}
+.type-hybrid {
+    background-image: url("/www/images/characteristic/type-hybrid.png");
+}
+
+.luminosity-full-shade {
+    background-image: url("/www/images/characteristic/luminosity-full-shade.png");
+}
+.luminosity-shaded-light {
+    background-image: url("/www/images/characteristic/luminosity-shaded-light.png");
+}
+.luminosity-filtered-light {
+    background-image: url("/www/images/characteristic/luminosity-filtered-light.png");
+}
+.luminosity-strong-light {
+    background-image: url("/www/images/characteristic/luminosity-strong-light.png");
+}
+
+.temperature-cold {
+    background-image: url("/www/images/characteristic/temperature-cold.png");
+}
+.temperature-seasoned {
+    background-image: url("/www/images/characteristic/temperature-seasoned.png");
+}
+.temperature-hot {
+    background-image: url("/www/images/characteristic/temperature-hot.png");
+}
+.temperature-very-hot {
+    background-image: url("/www/images/characteristic/temperature-very-hot.png");
+}
+
+.humidity-lt40 {
+    background-image: url("/www/images/characteristic/humidity-lt40.png");
+}
+.humidity-40-60 {
+    background-image: url("/www/images/characteristic/humidity-40-60.png");
+}
+.humidity-60-80 {
+    background-image: url("/www/images/characteristic/humidity-60-80.png");
+}
+.humidity-gt80 {
+    background-image: url("/www/images/characteristic/humidity-gt80.png");
+}
+
+.size-miniature {
+    background-image: url("/www/images/characteristic/size-miniature.png");
+}
+.size-small {
+    background-image: url("/www/images/characteristic/size-small.png");
+}
+.size-medium {
+    background-image: url("/www/images/characteristic/size-medium.png");
+}
+.size-big {
+    background-image: url("/www/images/characteristic/size-big.png");
+}
+
+.genera-back-link,
+.genus-back-link {
+    display: inline-block;
+    padding: var(--root-space);
+    margin: var(--root-space) 0;
+    color: var(--root-background-color);
+    background-color: var(--root-color);
+    border-radius: var(--root-border-radius);
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.genera-back-link {
+    width: calc(100% - 2 * var(--root-space));
+}
+
+.genus-back-link {
+    width: calc(50% - (2 * var(--root-space) + var(--root-fourth-space)));
+    margin-right: var(--root-fourth-space);
+}
+
+.genus-back-link + .genera-back-link {
+    width: calc(50% - (2 * var(--root-space) + var(--root-fourth-space)));
+    margin-left: var(--root-fourth-space);
+}
+
+.author .label {
+    display: block;
+    margin-bottom: var(--root-space);
+}
+
+.author-photo,
+.author-data {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.author-photo {
+    width: var(--root-icon-size);
+    max-width: 40vw;
+}
+
+.author-data {
+    padding: var(--root-space);
+}
+
+.author-name {
+    display: block;
+    font-weight: bold;
+}
+.author-mail:before {
+    content: attr(data-website) "\0040"attr(data-user);
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.icon-credit-link {
+    display: block;
+    padding: var(--root-space) 0 var(--root-space) calc(var(--root-double-space) * 1.2);
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    background-size: var(--root-double-space);
+}
+
+/*
+//1. Quais as regras CSS que garantem o footer no final da página
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 2 * var(--root-space));
+}
+
+footer {
+    margin-top: auto;
+}
+*/
+
+/*
+//2. Reduzir espaçamento para metade
+:root {
+    --root-space: calc(0.5 * var(--root-font-size));
+}
+*/
+
+/*
+//3. Alterar o tema para azul
+:root {
+    --root-color: #000080; /*Navy* /
+    --root-secondary-color: #00bfff; /*DeepSkyBlue* /
+    --root-background-color: #e0ffff; /*LightCyan* /
+}
+*/
+
+/*
+//4. Colocar texto nos botões
+.genus-item {
+    font-size: var(--root-font-size);
+    line-height: calc(2 * var(--root-icon-size) - var(--root-font-size));
+}
+
+.genus-link {
+    background-size: calc(var(--root-icon-size) - (2 * var(--root-font-size)));
+}
+*/
+
+/*
+//5. Reduzir font em 20% & colocar labels em cima (linhas separadas)
+@media only screen and (max-width: 480px) {
+    :root {
+        font-size: calc(0.8 * var(--root-font-size));
+    }
+
+    .label {
+        display: block;
+    }
+}
+*/
+
+/*
+//6. Duas colunas de icons em flexbox
+@media only screen and (max-width: 480px) {
+    .genus-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 10%;
+        row-gap: calc((100vw - 2 * (var(--root-double-space) + var(--root-space))) / 10);
+    }
+
+    .genus-item {
+        width: 45%;
+        aspect-ratio: 1;
+        padding: 0;
+    }
+
+    .genus-link {
+        width: 100%;
+        height: 100%;
+        background-size: 100%;
+    }
+}
+*/
