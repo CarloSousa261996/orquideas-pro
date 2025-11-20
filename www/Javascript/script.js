@@ -1,4 +1,5 @@
 import { data } from "./data.js";
+import { OrchidDetailsPage } from "./orchids-details.js";
 import { OrchidPage } from "./orchids.js";
 
 const homeH1 = document.createElement("h1");
@@ -25,7 +26,7 @@ data.genus.forEach((item) => {
 function init() {
   // document.body.appendChild(homeH1);
   // document.body.appendChild(homeUl);
-  OrchidPage();
+  OrchidDetailsPage();
 }
 
 init();
