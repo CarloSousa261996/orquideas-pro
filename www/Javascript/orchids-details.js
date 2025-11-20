@@ -32,8 +32,15 @@ const DATA_RESTORE = {
   ],
 };
 
+// Selecting the orchid with index 5 from the data
 const orchidData = data.orchid[5];
 
+
+/**
+ * Creating the HTML structure for the orchid details page
+ * @returns {void}
+ * 
+ */
 const h1 = document.createElement("h1");
 h1.classList.add("name");
 h1.textContent = orchidData.description;
@@ -43,6 +50,8 @@ orchidInfoSection.classList.add("orchid-info");
 
 const orchidCharacteristics = document.createElement("div");
 orchidCharacteristics.classList.add("characteristics");
+
+
 
 const CHARACTERISTICS = {
   genus: "Género",
