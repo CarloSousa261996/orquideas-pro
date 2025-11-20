@@ -1,6 +1,6 @@
 import { data } from "./data.js";
-import { OrchidDetailsPage } from "./orchids-details.js";
-import { OrchidPage } from "./orchids.js";
+import { OrchidDetailsPage } from "./pages/orchids-details.js";
+import { OrchidPage } from "./pages/orchids.js";
 
 const homeH1 = document.createElement("h1");
 homeH1.textContent = "Géneros";
