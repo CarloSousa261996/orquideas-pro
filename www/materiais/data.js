@@ -313,3 +313,32 @@ let data = {
         }
     ]
 };
+
+
+class characteristic {
+    constructor(id, description) {
+        this.id = id
+        this.description = description;
+    }
+}
+
+class orchid {
+    constructor(id, description, genus, type, luminosity, temperature, humidity, size, src) {
+        this.id = id;
+        this.description = description;
+        this.genus = genus;
+        this.type = type;       
+        this.luminosity = luminosity;
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.size = size;
+        this.src = src;
+    }
+}
+
+module.exports = {
+    data: data,
+    characteristic: characteristic,
+    orchid: orchid
+};
+
