@@ -21,7 +21,7 @@ export const Header = () => {
     },
     {
       label: "Tamanho",
-      value: "Size",
+      value: "size",
     },
     {
       label: "Humidade",
@@ -37,6 +37,10 @@ export const Header = () => {
     const li = document.createElement("li");
     li.textContent = item.label;
     li.setAttribute("id", item.value);
+
+    li.addEventListener("click", () => {
+      window.location.href = `index.html?characteristic=${item.value}`;
+    });
 
     navUl.appendChild(li);
   });

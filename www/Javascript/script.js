@@ -4,7 +4,7 @@ import { Orchid } from "./models/orchid.js";
 import { OrchidDetailsPage } from "./pages/orchids-details.js";
 import { OrchidPage } from "./pages/orchids.js";
 
-const currentyCharacteristic = "luminosity";
+const currentyCharacteristic = window.location.search.split("=")[1] || "genus";
 const homeH1 = document.createElement("h1");
 homeH1.classList.add("name");
 
