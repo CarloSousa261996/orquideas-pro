@@ -47,6 +47,11 @@ export class Orchid {
     return orchidCharacteristicValue;
   }
 
+  static getCharacteristicClass(characteristic, characteristicId) {
+    if (!DATA_RESTORE[characteristic]) return "none";
+    return `${characteristic}-${DATA_RESTORE[characteristic].find(({ id }) => id === characteristicId).description}`;
+  }
+
   image() {
     const orchidPhoto = document.createElement("img");
     orchidPhoto.classList.add("orchid-photo");

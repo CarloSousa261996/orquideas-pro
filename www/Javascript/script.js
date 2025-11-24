@@ -1,27 +1,36 @@
 import { Header } from "./components/header.js";
 import { data } from "./data.js";
+import { Orchid } from "./models/orchid.js";
 import { OrchidDetailsPage } from "./pages/orchids-details.js";
 import { OrchidPage } from "./pages/orchids.js";
 
+const currentyCharacteristic = "luminosity";
 const homeH1 = document.createElement("h1");
-homeH1.textContent = "Géneros";
 homeH1.classList.add("name");
 
 const homeUl = document.createElement("ul");
 homeUl.classList.add("genus-list");
 
-data.genus.forEach((item) => {
-  const li = document.createElement("li");
-  li.classList.add("genus-item");
+Object.keys(Orchid.characteristics).forEach((characteristic) => {
+  if (characteristic === currentyCharacteristic) {
+    homeH1.textContent = Orchid.characteristics[characteristic];
+    data[currentyCharacteristic].forEach((item) => {
+      const li = document.createElement("li");
+      li.classList.add("genus-item");
 
-  const a = document.createElement("a");
-  a.textContent = item.description;
-  a.setAttribute("id", item.description.toLocaleLowerCase());
-  a.classList.add("genus-link");
+      const a = document.createElement("a");
+      a.textContent = item.description;
+      a.classList.add("genus-link");
+      a.classList.add(Orchid.getCharacteristicClass(currentyCharacteristic, item.id));
 
-  li.appendChild(a);
+      if (currentyCharacteristic === "genus") {
+        a.setAttribute("id", item.description.toLocaleLowerCase());
+      }
 
-  homeUl.appendChild(li);
+      li.appendChild(a);
+      homeUl.appendChild(li);
+    });
+  }
 });
 
 function init() {
@@ -36,4 +45,3 @@ function init() {
 }
 
 init();
-console.log(data);
