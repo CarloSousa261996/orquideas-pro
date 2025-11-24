@@ -1,18 +1,19 @@
 import { data } from "../data.js";
 
-const genusId = 1;
+const orchidCharacteristic = new URLSearchParams(location.search).get("characteristic") || "genus";
+const orchidCharacteristicId = parseInt(new URLSearchParams(location.search).get("characteristic-id")) || 1;
 
 /**
  * Creating the HTML structure for the genus page
  * @returns {void}
  * /
  */
-const genus = data.genus.find((genus) => genus.id === genusId);
-const orchids = data.orchid.filter((orchid) => orchid.genus === genusId);
+const characteristic = data[orchidCharacteristic].find((genus) => genus.id === orchidCharacteristicId);
+const orchids = data.orchid.filter((orchid) => orchid.genus === orchidCharacteristicId);
 
 // Create and set h1 for genus name
 const h1 = document.createElement("h1");
-h1.textContent = genus.description;
+h1.textContent = characteristic.description;
 h1.classList.add("name");
 
 // Create orchid list
@@ -37,22 +38,23 @@ orchids.forEach((item) => {
  * /
  */
 const genusLink = document.createElement("a");
-genusLink.textContent = "Géneros";
+genusLink.textContent = characteristic.description;
 genusLink.classList.add("genera-back-link");
 
 const footer = document.createElement("footer");
 const footerLink = document.createElement("a");
 
-footerLink.textContent =
-  "About &copy; Tecnologia Setúbal &bull; Programação Web";
+footerLink.textContent = "About &copy; Tecnologia Setúbal &bull; Programação Web";
 footerLink.classList.add("about-link");
 
 footer.appendChild(footerLink);
 
- 
 export function OrchidPage() {
-  document.body.appendChild(h1);
-  document.body.appendChild(orchidList);
-  document.body.appendChild(genusLink);
-  document.body.appendChild(footer);
+  const content = document.createElement("div");
+  content.classList.add("content");
+  content.appendChild(h1);
+  content.appendChild(orchidList);
+  content.appendChild(genusLink);
+  content.appendChild(footer);
+  return content;
 }

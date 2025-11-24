@@ -4,7 +4,7 @@ import { Orchid } from "./models/orchid.js";
 import { OrchidDetailsPage } from "./pages/orchids-details.js";
 import { OrchidPage } from "./pages/orchids.js";
 
-const currentyCharacteristic = window.location.search.split("=")[1] || "genus";
+const currentyCharacteristic = new URLSearchParams(location.search).get("characteristic") || "genus";
 const homeH1 = document.createElement("h1");
 homeH1.classList.add("name");
 
@@ -28,6 +28,10 @@ Object.keys(Orchid.characteristics).forEach((characteristic) => {
       }
 
       li.appendChild(a);
+      li.addEventListener("click", () => {
+        const search = `?characteristic=${currentyCharacteristic}`;
+        location.search = `${search}&characteristic-id=${item.id}`;
+      });
       homeUl.appendChild(li);
     });
   }
@@ -37,11 +41,19 @@ function init() {
   const main = document.createElement("main");
   main.classList.add("container");
   main.appendChild(Header());
-  main.appendChild(homeH1);
-  main.appendChild(homeUl);
+  const content = document.createElement("div");
+  content.classList.add("content");
+
+  content.appendChild(homeH1);
+  content.appendChild(homeUl);
+
+  main.appendChild(content);
   document.body.appendChild(main);
   //OrchidDetailsPage();
-  //OrchidPage();
+
+  if (new URLSearchParams(location.search).get("characteristic-id")) {
+    main.replaceChild(OrchidPage(), content);
+  }
 }
 
 init();

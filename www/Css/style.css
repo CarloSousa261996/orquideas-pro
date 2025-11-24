@@ -87,6 +87,7 @@ footer {
     display: inline;
     padding: calc(var(--root-icon-size) / 10);
     font-size: 0;
+    cursor: pointer;
 }
 
 .genus-link {
