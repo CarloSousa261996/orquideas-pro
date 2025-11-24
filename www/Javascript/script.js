@@ -1,3 +1,4 @@
+import { Header } from "./components/header.js";
 import { data } from "./data.js";
 import { OrchidDetailsPage } from "./pages/orchids-details.js";
 import { OrchidPage } from "./pages/orchids.js";
@@ -24,9 +25,14 @@ data.genus.forEach((item) => {
 });
 
 function init() {
-  // document.body.appendChild(homeH1);
-  // document.body.appendChild(homeUl);
-  OrchidDetailsPage();
+  const main = document.createElement("main");
+  main.classList.add("container");
+  main.appendChild(Header());
+  main.appendChild(homeH1);
+  main.appendChild(homeUl);
+  document.body.appendChild(main);
+  //OrchidDetailsPage();
+  //OrchidPage();
 }
 
 init();

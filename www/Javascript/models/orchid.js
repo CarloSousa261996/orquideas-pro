@@ -20,14 +20,12 @@ export class Orchid {
     this.temperature = data.temperature.find(({ id }) => id === temperature);
     this.humidity = data.humidity.find(({ id }) => id === humidity);
     this.size = data.size.find(({ id }) => id === size);
-    this.src = src;
+    this.#src = src;
   }
 
   get description() {
     return this.#description;
   }
-
-  characteristic() {}
 
   createLabel(characteristic) {
     const orchidCharacteristicLabel = document.createElement("span");
@@ -47,6 +45,14 @@ export class Orchid {
     orchidCharacteristicValue.classList.add(characteristic);
     orchidCharacteristicValue.classList.add(characteristic);
     return orchidCharacteristicValue;
+  }
+
+  image() {
+    const orchidPhoto = document.createElement("img");
+    orchidPhoto.classList.add("orchid-photo");
+    orchidPhoto.setAttribute("src", this.#src);
+
+    return orchidPhoto;
   }
 
   static get characteristics() {

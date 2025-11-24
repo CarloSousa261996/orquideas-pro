@@ -26,16 +26,7 @@ orchidInfoSection.classList.add("orchid-info");
 const orchidCharacteristics = document.createElement("div");
 orchidCharacteristics.classList.add("characteristics");
 
-const CHARACTERISTICS = {
-  genus: "Género",
-  type: "Tipo",
-  luminosity: "Luminosidade",
-  temperature: "Temperatura",
-  humidity: "Humidade",
-  size: "Tamanho",
-};
-
-Object.keys(CHARACTERISTICS).forEach((characteristic) => {
+Object.keys(Orchid.characteristics).forEach((characteristic) => {
   const orchidCharacteristic = document.createElement("div");
   orchidCharacteristic.classList.add("characteristic");
 
@@ -48,12 +39,8 @@ Object.keys(CHARACTERISTICS).forEach((characteristic) => {
   orchidCharacteristics.appendChild(orchidCharacteristic);
 });
 
-const orchidPhoto = document.createElement("img");
-orchidPhoto.classList.add("orchid-photo");
-orchidPhoto.setAttribute("src", orchidData.src);
-
 orchidInfoSection.appendChild(orchidCharacteristics);
-orchidInfoSection.appendChild(orchidPhoto);
+orchidInfoSection.appendChild(orchid.image());
 
 export function OrchidDetailsPage() {
   document.body.appendChild(h1);
