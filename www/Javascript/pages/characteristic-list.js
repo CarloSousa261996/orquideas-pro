@@ -1,6 +1,7 @@
 import { Content } from "../components/content.js";
 import { data } from "../data.js";
 import { Orchid } from "../models/orchid.js";
+import { navigateTo } from "../route.js";
 
 export function CharacteristicPage() {
   const currentyCharacteristic = new URLSearchParams(location.search).get("characteristic") || "genus";
@@ -26,7 +27,7 @@ export function CharacteristicPage() {
         li.appendChild(a);
         li.addEventListener("click", () => {
           const search = `?characteristic=${currentyCharacteristic}`;
-          location.search = `${search}&characteristic-id=${item.id}`;
+          navigateTo(`${search}&characteristic-id=${item.id}`);
         });
         homeUl.appendChild(li);
       });

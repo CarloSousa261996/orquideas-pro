@@ -377,6 +377,7 @@ header h1 {
 header nav ul{
     display: flex;
     gap: 2rem;
+    align-items: center;
     
 }
 
@@ -387,4 +388,42 @@ header li {
 
 header li:hover {
     color: var(--root-color);
+}
+
+.btn {
+    background-color: var(--root-color);
+    padding: var(--root-space);
+    cursor: pointer;
+    border-radius: 1rem;
+    border: none;
+    color: #fff;
+}
+
+.btn:hover {
+    background-color: var(--root-secondary-color);
+    transition: 200ms;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+form input, select {
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 0.1rem solid #bbb;
+}
+
+.select {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-size: 1.2rem;
 }

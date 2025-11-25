@@ -1,5 +1,6 @@
 import { Content } from "../components/content.js";
 import { data } from "../data.js";
+import { navigateTo } from "../route.js";
 
 export function OrchidPage() {
   const orchidCharacteristic = new URLSearchParams(location.search).get("characteristic") || "genus";
@@ -19,7 +20,7 @@ export function OrchidPage() {
     a.classList.add("orchid-link");
     li.appendChild(a);
     li.addEventListener("click", () => {
-      location.search = `?orchid-id=${item.id}`;
+      navigateTo(`?orchid-id=${item.id}`);
     });
     orchidList.appendChild(li);
   });
