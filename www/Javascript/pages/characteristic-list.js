@@ -1,17 +1,15 @@
+import { Content } from "../components/content.js";
 import { data } from "../data.js";
 import { Orchid } from "../models/orchid.js";
 
 export function CharacteristicPage() {
   const currentyCharacteristic = new URLSearchParams(location.search).get("characteristic") || "genus";
-  const homeH1 = document.createElement("h1");
-  homeH1.classList.add("name");
 
   const homeUl = document.createElement("ul");
   homeUl.classList.add("genus-list");
 
   Object.keys(Orchid.characteristics).forEach((characteristic) => {
     if (characteristic === currentyCharacteristic) {
-      homeH1.textContent = Orchid.characteristics[characteristic];
       data[currentyCharacteristic].forEach((item) => {
         const li = document.createElement("li");
         li.classList.add("genus-item");
@@ -34,10 +32,6 @@ export function CharacteristicPage() {
       });
     }
   });
-  const content = document.createElement("div");
-  content.classList.add("content");
 
-  content.appendChild(homeH1);
-  content.appendChild(homeUl);
-  return content;
+  return Content(Orchid.characteristics[currentyCharacteristic], homeUl);
 }
