@@ -1,4 +1,6 @@
-export function Content(title, component) {
+import { Footer } from "./footer.js";
+
+export function Content(title, ...component) {
   const content = document.createElement("div");
   content.classList.add("content");
 
@@ -7,7 +9,8 @@ export function Content(title, component) {
   h1.textContent = title;
 
   content.appendChild(h1);
-  content.appendChild(component);
-
+  component.forEach((component) => {
+    content.appendChild(component);
+  });
   return content;
 }

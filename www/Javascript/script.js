@@ -1,3 +1,4 @@
+import { Footer } from "./components/footer.js";
 import { Header } from "./components/header.js";
 import { CharacteristicPage } from "./pages/characteristic-list.js";
 import { OrchidDetailsPage } from "./pages/orchids-details.js";
@@ -7,11 +8,9 @@ function init() {
   const main = document.createElement("main");
   main.classList.add("container");
   main.appendChild(Header());
-  const content = CharacteristicPage();
-
-  main.appendChild(content);
+  main.appendChild(CharacteristicPage());
+  main.appendChild(Footer());
   document.body.appendChild(main);
-  //OrchidDetailsPage();
 
   const currentyContent = main.getElementsByClassName("content")[0];
 
