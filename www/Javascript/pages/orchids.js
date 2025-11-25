@@ -29,6 +29,9 @@ orchids.forEach((item) => {
   a.textContent = item.description;
   a.classList.add("orchid-link");
   li.appendChild(a);
+  li.addEventListener("click", () => {
+    location.search = `?orchid-id=${item.id}`;
+  });
   orchidList.appendChild(li);
 });
 

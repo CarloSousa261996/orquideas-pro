@@ -43,6 +43,9 @@ orchidInfoSection.appendChild(orchidCharacteristics);
 orchidInfoSection.appendChild(orchid.image());
 
 export function OrchidDetailsPage() {
-  document.body.appendChild(h1);
-  document.body.appendChild(orchidInfoSection);
+  const content = document.createElement("div");
+  content.classList.add("content");
+  content.appendChild(h1);
+  content.appendChild(orchidInfoSection);
+  return content;
 }

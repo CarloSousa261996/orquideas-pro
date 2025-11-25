@@ -13,8 +13,14 @@ function init() {
   document.body.appendChild(main);
   //OrchidDetailsPage();
 
+  const currentyContent = main.getElementsByClassName("content")[0];
+
   if (new URLSearchParams(location.search).get("characteristic-id")) {
-    main.replaceChild(OrchidPage(), content);
+    main.replaceChild(OrchidPage(), currentyContent);
+  }
+
+  if (new URLSearchParams(location.search).get("orchid-id")) {
+    main.replaceChild(OrchidDetailsPage(), currentyContent);
   }
 }
 
