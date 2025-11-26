@@ -33,6 +33,10 @@ export const Header = () => {
       label: "Temperatura",
       value: "temperature",
     },
+    {
+      label: "Todas",
+      value: "all",
+    },
   ];
 
   navItens.forEach((item) => {

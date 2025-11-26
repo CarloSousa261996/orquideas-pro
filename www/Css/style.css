@@ -392,7 +392,8 @@ header li:hover {
 
 .btn {
     background-color: var(--root-color);
-    padding: var(--root-space);
+    padding: 1.2rem 2rem;
+    font-size: 1.2rem;
     cursor: pointer;
     border-radius: 1rem;
     border: none;
@@ -400,7 +401,8 @@ header li:hover {
 }
 
 .btn:hover {
-    background-color: var(--root-secondary-color);
+    transform: scale(1.05);
+    filter: brightness(0.85);
     transition: 200ms;
 }
 
@@ -426,4 +428,41 @@ form input, select {
 
 form label {
     font-size: 1.2rem;
+}
+
+.orchid-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border: 0.1rem solid #bbb;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.orchid-item div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.orchid-item img {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.orchid-item:hover {
+    background-color: #f9f9f9;
+    transition: 200ms;
+}
+
+.btn-details {
+    background-color: #222222;
+}
+
+.btn-delete {
+    background-color: #ff4d4d;
 }
