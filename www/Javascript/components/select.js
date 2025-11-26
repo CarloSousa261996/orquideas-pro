@@ -1,4 +1,4 @@
-export const Select = (options, labelText = "selecione", placeholder) => {
+export const Select = (options, labelText = "selecione", selectedValue, placeholder) => {
   const select = document.createElement("select");
   placeholder ||= `Selecione o(a) ${labelText}`;
 
@@ -7,6 +7,10 @@ export const Select = (options, labelText = "selecione", placeholder) => {
   placeholderOption.disabled = true;
   placeholderOption.selected = true;
   select.appendChild(placeholderOption);
+
+  if (selectedValue !== undefined) {
+    select.value = selectedValue;
+  }
 
   const div = document.createElement("div");
   div.classList.add("select");

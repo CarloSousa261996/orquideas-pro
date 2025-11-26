@@ -1,4 +1,5 @@
 import { CharacteristicPage } from "./pages/characteristic-list.js";
+import { EditOrchidPage } from "./pages/edit-orchid.js";
 import { NewOrchidPage } from "./pages/new-orchid.js";
 import { OrchidListPage } from "./pages/orchid-list.js";
 import { OrchidDetailsPage } from "./pages/orchids-details.js";
@@ -11,6 +12,10 @@ export function navigateTo(url) {
 
   if (new URLSearchParams(location.search).get("characteristic") === "all") {
     main.replaceChild(OrchidListPage(), currentyContent);
+  }
+
+  if (new URLSearchParams(location.search).get("orchid-id") && new URLSearchParams(location.search).get("edit")) {
+    main.replaceChild(EditOrchidPage(), currentyContent);
   }
 
   if (new URLSearchParams(location.search).get("characteristic") && !new URLSearchParams(location.search).get("characteristic-id")) {
