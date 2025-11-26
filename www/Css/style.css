@@ -1,16 +1,16 @@
 :root {
     font-size: 62.5%;
-    --root-color: #228b22; /*ForestGreen*/
-    --root-secondary-color: #00fa9a; /*MediumSpringGreen*/
+    --root-color: #6423a0; /*ForestGreen*/
     --root-background-color: #f0fff0; /*HoneyDew*/
+    --root-secondary-color: #bd3cb7; /*MediumSpringGreen*/
     --root-secondary-background-color: #eee;
-    --root-font-size: 1.6rem;
     --root-icon-size: calc(10 * var(--root-font-size));
+    --root-font-size: 1.6rem;
     --root-space: var(--root-font-size);
     --root-half-space: calc(var(--root-space) / 2);
     --root-fourth-space: calc(var(--root-space) / 4);
-    --root-double-space: calc(var(--root-space) * 2);
     --root-border-radius: var(--root-space);
+    --root-double-space: calc(var(--root-space) * 2);
 }
 
 body {
@@ -82,6 +82,10 @@ footer {
 
 .genus-list {
     text-align: center;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .genus-item {
@@ -95,12 +99,34 @@ footer {
     display: inline-block;
     width: var(--root-icon-size);
     height: var(--root-icon-size);
-    border: calc(0.2 * var(--root-font-size)) solid var(--root-color);
+    /* border: calc(0.1 * var(--root-font-size)) solid var(--root-color); */
     border-radius: var(--root-border-radius);
     background-repeat: no-repeat;
     background-position: center;
     background-size: var(--root-icon-size);
-    box-shadow: var(--root-fourth-space) var(--root-fourth-space) var(--root-fourth-space) var(--root-color);
+    box-shadow: #6423a075 0px 3px 8px;
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.genus-link:hover {
+    box-shadow: #6423a0 0px 5px 15px;
+    transition: 0.3s;
+}
+
+.genus-link p {
+    font-size: var(--root-font-size);
+    font-weight: bold;
+    position: absolute;
+    bottom: -4rem;
+    color: var(--root-secondary-color);
+}
+
+.genus-link p:hover {
+    color: var(--root-color);
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 1s;
 }
 
 #bulbophyllum {
