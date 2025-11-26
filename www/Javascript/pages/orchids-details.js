@@ -38,8 +38,8 @@ export function OrchidDetailsPage() {
     orchidCharacteristics.appendChild(orchidCharacteristic);
   });
 
-  orchidInfoSection.appendChild(orchidCharacteristics);
   orchidInfoSection.appendChild(orchid.image());
+  orchidInfoSection.appendChild(orchidCharacteristics);
 
   return Content(orchid.description, orchidInfoSection);
 }
