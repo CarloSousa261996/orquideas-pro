@@ -41,6 +41,14 @@ export const Info = () => {
   section.appendChild(rightInfo);
   section.appendChild(formWrap);
 
+  // Add LogoIPS image below contacts
+  const logoWrapper = document.createElement("div");
+  logoWrapper.classList.add("logo-ips-wrapper");
+  logoWrapper.innerHTML = `
+    <img src="/www/images/LogoIPS.png" alt="IPS Logo" class="logo-ips" />
+  `;
+  section.appendChild(logoWrapper);
+
   return section;
 };
 

@@ -13,8 +13,8 @@ export const AboutPage = () => {
   cta.classList.add("cta-section");
   cta.innerHTML = `
     <div class="cta-inner">
-      <h3>Do you have any Contest?</h3>
-      <p>Register with our virtual voting platform</p>
+      <h3>Explore the world of orchids</h3>
+      <p>find the perfect species for your home or garden.</p>
       <button class="btn cta-btn">Contact us</button>
     </div>
   `;
