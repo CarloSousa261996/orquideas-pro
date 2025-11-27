@@ -1,12 +1,11 @@
 import { navigateTo } from "../route.js";
+import { Logo } from "./logo.js";
 
 export const Header = () => {
   const header = document.createElement("header");
-  const logo = document.createElement("h1");
+  const logo = Logo();
   const nav = document.createElement("nav");
   const navUl = document.createElement("ul");
-
-  logo.textContent = "Orquideas PRO";
 
   const navItens = [
     {
