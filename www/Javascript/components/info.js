@@ -28,11 +28,11 @@ export const Info = () => {
   formWrap.innerHTML = `
     <form>
       <label>Name :</label>
-      <input type="text" placeholder="Name" />
+      <input type="text" placeholder="insert name" />
       <label>Email :</label>
-      <input type="email" placeholder="Email" />
+      <input type="email" placeholder="insert email" />
       <label>Message :</label>
-      <textarea placeholder="Message"></textarea>
+      <textarea placeholder="write message"></textarea>
       <button type="submit" class="btn">Send Message</button>
     </form>
   `;

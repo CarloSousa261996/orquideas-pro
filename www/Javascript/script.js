@@ -1,6 +1,7 @@
 import { Footer } from "./components/footer.js";
 import { Header } from "./components/header.js";
 import { CharacteristicPage } from "./pages/characteristic-list.js";
+import { RegisterModal } from "./components/register-modal.js";
 
 function init() {
   const main = document.createElement("main");
@@ -22,6 +23,16 @@ function init() {
   main.appendChild(CharacteristicPage());
   main.appendChild(Footer());
   document.body.appendChild(main);
+
+  // Adicionar modal de registro
+  const registerModal = RegisterModal();
+  registerModal.classList.add("hidden");
+  document.body.appendChild(registerModal);
+
+  // Função global para abrir modal
+  window.openRegisterModal = () => {
+    registerModal.classList.remove("hidden");
+  };
 
   // ajustar comportamento ao redimensionar: fechar menu em desktop
   const handleResize = () => {

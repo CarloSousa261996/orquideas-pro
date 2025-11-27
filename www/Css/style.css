@@ -17,6 +17,7 @@
     --root-border-radius: var(--root-space);
     --root-double-space: calc(var(--root-space) * 2);
     --root-background-gradient: linear-gradient(135deg, #5f0f6b, #bf0fa2);
+    --root-ips: #1c6258;
 }
 
 /* Garantir que html ocupe 100% da altura para suportar footer fixo no fim */
@@ -444,6 +445,7 @@ header li:hover {
     transform: scale(1.05);
     filter: brightness(0.85);
     transition: 200ms;
+    background-color: var(--root-secondary-color);
 }
 
 form {
@@ -557,6 +559,7 @@ footer .copyright {
 }
 
 /* About page styles */
+
 .about-page {
     padding: 3rem 1rem 6rem;
 }
@@ -614,9 +617,40 @@ footer .copyright {
 
 .contact-info .about-phone {
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.6rem;
     margin-bottom: 0.5rem;
+    cursor: pointer;
 }
+
+.contact-info .about-phone:hover,
+.contact-info .about-email:hover {
+    text-decoration: underline;
+    color: var(--root-color);
+}
+
+.contact-info .about-email {
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.contact-info, .contact-form {
+    background: linear-gradient(0deg, rgba(146, 76, 135, 0.09), rgba(0,0,0,0.09));
+    border-radius: 15px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    padding: 2rem;
+}
+
+.contact-info:hover {
+    transform: scale(1.05);
+    filter: brightness(0.85);
+    transition: 200ms;
+}
+
+
+/* Edição */
 
 .contact-form {
     grid-column: 3;
@@ -625,6 +659,7 @@ footer .copyright {
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    border-radius: 15px;
 }
 
 .contact-form form {
@@ -633,6 +668,9 @@ footer .copyright {
     background: linear-gradient(0deg, rgba(0,0,0,0.03), rgba(0,0,0,0.03));
     padding: 2rem;
     border-radius: 6px;
+    background-color:var(--root-background-color);
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+
 }
 
 .contact-form input,
@@ -666,6 +704,8 @@ footer .copyright {
 }
 
 
+
+
 /* MEDIA QUERIES - RESPONSIVIDADE */
 
 /* Tablets - 768px e menores */
@@ -697,6 +737,7 @@ footer .copyright {
 
     header li {
         font-size: 1.2rem;
+        padding: 0.8rem 1.2rem;
     }
 
     .orchid-photo {
@@ -812,7 +853,7 @@ footer .copyright {
 
     header nav ul li {
         width: 100%;
-        padding: 0.6rem 0.8rem;
+        padding: 0.8rem 1.2rem;
         background: transparent;
         border-radius: 0.6rem;
         text-align: center;
@@ -1037,10 +1078,11 @@ footer .copyright {
         padding: 0;
         margin: 0;
         list-style: none;
+        width: 100%;
     }
 
     header.menu-open nav ul li {
-        padding: 0.6rem 1rem;
+        padding: 0.8rem 1.2rem;
         text-align: center;
         background: transparent;
         border-radius: 0.6rem;
@@ -1178,6 +1220,7 @@ footer .copyright {
 
     header li {
         font-size: 1.6rem;
+        
     }
 
     .genus-link {
@@ -1385,4 +1428,219 @@ footer .copyright {
     .copyright {
         font-size: 1.8rem;
     }
+}
+
+/* Modal Register Styles */
+.modal-register {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-register.hidden {
+    display: none;
+}
+
+.register-container {
+    background: linear-gradient(135deg, rgba(100, 35, 160, 0.95), rgba(57, 7, 44, 0.95));
+    border-radius: 2rem;
+    padding: 3rem;
+    width: 90%;
+    max-width: 420px;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.register-container h2 {
+    color: #000;
+    text-align: center;
+    font-size: 2.8rem;
+    margin: 0 0 2.5rem;
+    font-weight: 700;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 0.8rem;
+    font-size: 2.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: #333;
+    transform: scale(1.1);
+}
+
+.form-group {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 1.2rem 1rem 0.8rem;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    background: transparent;
+    color: #000;
+    font-size: 1.5rem;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-bottom-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.form-group label {
+    display: block;
+    color: #000;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group .icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1.8rem;
+    pointer-events: none;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0 2rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    accent-color: var(--root-secondary-color);
+}
+
+.checkbox-group label {
+    color: #000;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin: 0;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 0.8rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #000;
+    font-size: 1.3rem;
+}
+
+.login-link a {
+    color: var(--root-secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/** modificação new orchid*/
+
+body {
+  margin: 0;
+  padding: 0;
+  background: url("orchid-blur.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.new-orchid-form {
+  max-width: 500px;
+  margin: 20px auto;
+  background-color: var(--root-border-radius);
+  /*background: rgba(255, 255, 255, 0.9);*/
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.new-orchid-form input,
+.new-orchid-form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: "Segoe UI", sans-serif;
+  color: var(--root-color);
+  font-weight: bold;
+}
+
+.new-orchid-form .btn {
+  background-color:var(--root-color);
+  color: var(--root-background-color);
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.new-orchid-form .btn:hover {
+  background-color: var(--root-secondary-color);
 }
