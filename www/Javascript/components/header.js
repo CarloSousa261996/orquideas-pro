@@ -48,6 +48,12 @@ export const Header = () => {
   });
 
   navUl.appendChild(NewOrchidBtn());
+  // adicionar link About
+  const aboutLi = document.createElement("li");
+  aboutLi.textContent = "About";
+  aboutLi.setAttribute("id", "about");
+  aboutLi.addEventListener("click", () => navigateTo("?about=true"));
+  navUl.appendChild(aboutLi);
   nav.appendChild(navUl);
 
   header.appendChild(logo);

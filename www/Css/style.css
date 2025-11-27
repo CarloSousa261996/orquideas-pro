@@ -16,6 +16,7 @@
     --root-fourth-space: calc(var(--root-space) / 4);
     --root-border-radius: var(--root-space);
     --root-double-space: calc(var(--root-space) * 2);
+    --root-background-gradient: linear-gradient(135deg, #5f0f6b, #bf0fa2);
 }
 
 /* Garantir que html ocupe 100% da altura para suportar footer fixo no fim */
@@ -41,9 +42,9 @@ html {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    border: 2px solid #fff;
+    border: 2px solid var(--root-background-color);
     position: relative;
-    color: #fff;
+    color: var(--root-background-color);
     font-size: 24px;
     transition: 0.3s;
     opacity: 0;
@@ -57,7 +58,9 @@ html {
 .a, .iconClass:hover{
     color: var(--root-secondary-color);
     transform: scale(1.5);  
-    box-shadow: 0 0 20px  #fff;}
+    box-shadow: 0 0 20px  var(--root-background-color);
+
+}
 
 
 body {
@@ -102,6 +105,12 @@ body {
     border-radius: 0.4rem;
     position: absolute;
     bottom: -0.5rem;
+}
+
+.name:hover::before {
+    width: 12rem;
+    transition: width 0.5s;
+    background-color: var(--root-background-gradient);
 }
 
 .genus-list,
@@ -165,13 +174,13 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    box-shadow: #6423a075 0px 3px 8px;
+    box-shadow: var(--root-color) 75 0px 3px 8px;
     position: relative;
     margin-bottom: 3rem;
 }
 
 .genus-link:hover {
-    box-shadow: #6423a0 0px 5px 15px;
+    box-shadow: var(--root-color) 0px 5px 15px;
     transition: 0.3s;
 }
 
@@ -406,16 +415,25 @@ header li {
     font-weight: 500;
     font-size: 1.4rem;
 }
-
+/** edição*/
 header li:hover {
-    color: var(--root-color);
+    background-color: var(--root-color);
+    color: var(--root-background-color);
     transition: 200ms;
+     padding: 1.2rem 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    border: none;
+    color: #fff;
+
 }
 
 .btn {
     background-color: var(--root-color);
-    padding: 1.2rem 2rem;
-    font-size: 1.2rem;
+    transform: scale(1.05);
+    filter: brightness(0.85);
+    transition: 200ms;
     cursor: pointer;
     border-radius: 1rem;
     border: none;
@@ -536,6 +554,88 @@ footer .footer-links a {
 footer .copyright {
     text-align: center;
     font-size: 1.4rem;
+}
+
+/* About page styles */
+.about-page {
+    padding: 3rem 1rem 6rem;
+}
+
+.contact-section {
+    display: flex;
+    gap: 4rem;
+    align-items: stretch;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+}
+
+.contact-info {
+    flex: 1;
+    padding: 2rem;
+}
+
+.contact-info .about-title {
+    font-size: 2.4rem;
+    color: #0f2f2a;
+    margin: 0 0 1rem;
+}
+
+.contact-info .about-sub {
+    color: #2f5f58;
+    margin-bottom: 1.2rem;
+}
+
+.contact-info .about-phone {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-form {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-form form {
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.03), rgba(0,0,0,0.03));
+    padding: 2rem;
+    border-radius: 6px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #cfcfcf;
+}
+
+.cta-section {
+    background:var(--root-background-gradient);
+    color: #fff;
+    padding: 3rem 1rem;
+}
+
+.cta-section .cta-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cta-section h3 { font-size: 2.4rem; margin: 0 0 0.6rem; }
+.cta-section p { margin: 0 0 1.2rem; }
+.cta-section .cta-btn { background: transparent; border: 2px solid rgba(255,255,255,0.6); color:#fff; }
+
+@media only screen and (max-width: 760px) {
+    .contact-section { flex-direction: column; padding: 1rem; }
+    .contact-form form { max-width: 100%; }
 }
 
 

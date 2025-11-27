@@ -4,6 +4,8 @@ import { NewOrchidPage } from "./pages/new-orchid.js";
 import { OrchidListPage } from "./pages/orchid-list.js";
 import { OrchidDetailsPage } from "./pages/orchids-details.js";
 import { OrchidPage } from "./pages/orchids.js";
+import { AboutPage } from "./pages/about.js";
+
 
 export function navigateTo(url) {
   history.pushState(null, "", url);
@@ -32,5 +34,9 @@ export function navigateTo(url) {
 
   if (new URLSearchParams(location.search).get("new-orchid")) {
     main.replaceChild(NewOrchidPage(), currentyContent);
+  }
+
+  if (new URLSearchParams(location.search).get("about")) {
+    main.replaceChild(AboutPage(), currentyContent);
   }
 }
