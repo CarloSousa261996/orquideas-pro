@@ -570,6 +570,20 @@ footer .copyright {
     margin: 0 auto 3rem;
 }
 
+.contact-icon {
+    font-size: 2.8rem;
+    color: var(--root-color);
+    background: #fff;
+    width: 5.6rem;
+    height: 5.6rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    margin-bottom: 1rem;
+}
+
 .contact-info {
     flex: 1;
     padding: 2rem;
