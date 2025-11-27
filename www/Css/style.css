@@ -255,8 +255,10 @@ body {
 .orchid-photo {
     display: block;
     max-width: 50vw;
+    min-width: 35rem;
     max-height: calc((6 * (2 * var(--root-space) + (2 * var(--root-font-size)))));
     border-radius: var(--root-border-radius);
+    object-fit: cover;
 }
 
 .type-species {
@@ -415,19 +417,28 @@ header li {
     cursor: pointer;
     font-weight: 500;
     font-size: 1.4rem;
+    position: relative;
 }
-/** edição*/
-header li:hover {
-    background-color: var(--root-color);
-    color: var(--root-background-color);
-    transition: 200ms;
-     padding: 1.2rem 2rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    border-radius: 1rem;
-    border: none;
-    color: #fff;
 
+header li::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: all 0.5s;
+}
+
+
+header li::after {
+  bottom: -0.4rem;
+  left: 0;
+}
+
+
+header li:hover::after {
+  width: 100%;
+  transition: width 0.25s ease-in-out 0.25s;
 }
 
 .btn {
@@ -439,6 +450,7 @@ header li:hover {
     border-radius: 1rem;
     border: none;
     color: #fff;
+    padding: 1.2rem 2rem;
 }
 
 .btn:hover {
@@ -519,8 +531,6 @@ form label {
     color: var(--root-tertiary-color);
     font-weight: bold;
 }
-
-
 
 /* Footer */
 
@@ -703,26 +713,13 @@ footer .copyright {
     .contact-form form { max-width: 100%; }
 }
 
-
-
-
 /* MEDIA QUERIES - RESPONSIVIDADE */
 
 /* Tablets - 768px e menores */
 
 @media only screen and (max-width: 768px) {
-    :root {
-        font-size: 55%;
-    }
-
     body {
         width: calc(100vw - 1.6rem);
-    }
-
-    header {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
     }
 
     header h1 {
@@ -733,11 +730,6 @@ footer .copyright {
         flex-wrap: wrap;
         gap: 0.5rem;
         justify-content: center;
-    }
-
-    header li {
-        font-size: 1.2rem;
-        padding: 0.8rem 1.2rem;
     }
 
     .orchid-photo {
@@ -794,21 +786,8 @@ footer .copyright {
 
 /* Celulares - 480px e menores */
 @media only screen and (max-width: 480px) {
-    :root {
-        font-size: 50%;
-    }
-
     body {
-        width: 100vw;
         padding: 0;
-      
-    }
-
-    header {
-        padding: 0.8rem 1rem;
-        margin-bottom: 0.8rem;
-        flex-direction: column;
-        gap: 0.8rem;
     }
 
     header h1 {
@@ -816,10 +795,7 @@ footer .copyright {
         margin: 0;
     }
 
-    #logo {
-        font-size: 1.8rem;
-    }
-
+    
     header nav ul {
         flex-direction: column;
         gap: 0.4rem;
@@ -864,8 +840,6 @@ footer .copyright {
         color: var(--root-color);
     }
 
-    /* Opcional: botão visual para indicar menu (requer HTML para funcionalidade JS/checkbox)
-       deixe visível para que você possa adicionar um botão <button class="menu-toggle">☰</button> no header */
     .menu-toggle {
         display: block;
         background: none;
@@ -875,12 +849,6 @@ footer .copyright {
         cursor: pointer;
         align-self: flex-end;
         padding: 0.2rem 0.4rem;
-        margin-bottom: 0.4rem;
-    }
-
-    header li {
-        font-size: 1rem;
-        padding: 0.4rem;
     }
 
     .container {
@@ -944,7 +912,7 @@ footer .copyright {
 
     .orchid-item img {
         width: 100%;
-        height: auto;
+        height: 20rem;
         aspect-ratio: 1;
     }
 
@@ -952,11 +920,6 @@ footer .copyright {
         padding: 0.8rem 1.2rem;
         font-size: 0.9rem;
         width: 100%;
-    }
-
-    .btn-details,
-    .btn-delete {
-        width: 48%;
     }
 
     form {
@@ -1041,14 +1004,12 @@ footer .copyright {
         border-radius: 0.8rem;
         cursor: pointer;
         font-weight: bold;
-
+        margin: 1rem 0;
     }
 
     .menu-toggle:hover {
-        background-color: var(--root-tertiary-color);
         color: #fff;
         transition: 200ms;
-
     }
 
 
@@ -1095,12 +1056,6 @@ footer .copyright {
         color: var(--root-color);
         transition: 200ms;
     }
-
-    /* garantir que o botão toggle esteja visível na direita */
-    header .menu-toggle {
-        margin: 10px 0 0 auto;
-        z-index: 1200;
-    }
 }
 
 /* Esconder o toggle por padrão em telas maiores */
@@ -1136,10 +1091,6 @@ footer .copyright {
 
 /* Celulares muito pequenos - 360px e menores*/ 
 @media only screen and (max-width: 360px) {
-    :root {
-        font-size: 48%;
-    }
-
     header {
         padding: 0.6rem;
     }
@@ -1196,14 +1147,9 @@ footer .copyright {
 
 /* Desktop XL - 1440px e maiores */
 @media only screen and (min-width: 1440px) {
-    :root {
-        font-size: 65%;
-    } 
-
     body {
         margin: 0px;
         padding: 0px;
-      
     }
 
     header {
@@ -1216,11 +1162,6 @@ footer .copyright {
 
     header nav ul {
         gap: 2.5rem;
-    }
-
-    header li {
-        font-size: 1.6rem;
-        
     }
 
     .genus-link {
@@ -1258,14 +1199,8 @@ footer .copyright {
 
 /* 4K - 2560px e maiores */
 @media only screen and (min-width: 2560px) {
-    :root {
-        font-size: 75%;
-    }
-
     body {
         width: calc(100vw - 4rem);
-      
-       
     }
 
     header {
@@ -1643,4 +1578,35 @@ body {
 
 .new-orchid-form .btn:hover {
   background-color: var(--root-secondary-color);
+}
+
+
+a::before,
+a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: all 0.5s;
+}
+
+a::before {
+  top: 0;
+  left: 0;
+}
+
+a::after {
+  bottom: 0;
+  right: 0;
+}
+
+a:hover::before {
+  width: 100%;
+  transition: width 0.25s ease-in-out;
+}
+
+a:hover::after {
+  width: 100%;
+  transition: width 0.25s ease-in-out 0.25s;
 }
