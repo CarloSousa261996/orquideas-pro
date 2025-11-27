@@ -16,6 +16,43 @@
     --root-border-radius: var(--root-space);
     --root-double-space: calc(var(--root-space) * 2);
 }
+@keyframes slideLeft {
+    0% {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.iconClass {
+    text-decoration: none;
+    display: inline-flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #fff;
+    position: relative;
+    color: #fff;
+    font-size: 24px;
+    transition: 0.3s;
+    opacity: 0;
+    animation: slideLeft .5s ease forwards;
+    animation-delay: calc(.2s * var(--i));
+    transition-property:transform ;}
+  
+.iconClass:not(:last-child){
+    margin-right: 60px;}
+  
+.a, .iconClass:hover{
+    color: var(--root-secondary-color);
+    transform: scale(1.5);  
+    box-shadow: 0 0 20px  #fff;}
+
 
 body {
     display: flex;
