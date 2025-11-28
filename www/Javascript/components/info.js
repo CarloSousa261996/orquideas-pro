@@ -19,7 +19,7 @@ export const Info = () => {
     <div class="contact-icon" aria-hidden="true"><i class="fa-solid fa-user"></i></div>
     <p class="about-sub">Call for Fabio Junik</p>
     <p class="about-phone">+233 98 465 2331</p>
-    <p class="about-email">fabiojunik@gmail.com</p>
+    <p class="about-email">2024109274@estudantes.ips.pt</p>
   `;
 
   // Contact form
