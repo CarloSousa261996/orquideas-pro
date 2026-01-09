@@ -3,6 +3,7 @@ import favicon from "serve-favicon";
 import path from "path";
 import { fileURLToPath } from "url";
 import orchidsRouter from "./routes/orchids.js";
+import initDatabase from "./api/config/init-db.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,6 +31,8 @@ app.get("/api", (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+  console.log("Initializing database...");
+  await initDatabase();
 });

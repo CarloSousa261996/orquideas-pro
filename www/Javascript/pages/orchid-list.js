@@ -6,12 +6,19 @@ export function OrchidListPage() {
   const orchidList = document.createElement("div");
   orchidList.classList.add("orchid-list");
 
-  fetchJson("/api/orchids").then((orchids) => {
-    orchids.forEach((orchid) => {
-      const orchidItem = createOrchidItem(orchid);
-      orchidList.appendChild(orchidItem);
+  fetchJson("/api/orchids")
+    .then((orchids) => {
+      if (orchids && orchids.length > 0) {
+        orchids.forEach((orchid) => {
+          const orchidItem = createOrchidItem(orchid);
+          orchidList.appendChild(orchidItem);
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Erro ao carregar orquídeas:", error);
+      orchidList.innerHTML = "<p>Erro ao carregar orquídeas</p>";
     });
-  });
 
   return Content("Lista de Orquídeas", orchidList);
 }
@@ -50,15 +57,18 @@ function createOrchidItem(orchid) {
   btnDelete.classList.add("btn-delete");
   btnDelete.classList.add("btn");
 
-  btnDelete.addEventListener("click", () => {
+  btnDelete.addEventListener("click", async () => {
     if (confirm("Tem certeza que deseja excluir esta orquídea?")) {
-      fetch(`/api/orchids/${orchid.id}`, { method: "DELETE" }).then((res) => {
-        if (res.ok) {
+      try {
+        const response = await fetch(`/api/orchids/${orchid.id}`, { method: "DELETE" });
+        if (response.ok) {
           navigateTo("?characteristic=all");
         } else {
           alert("Erro ao excluir orquídea.");
         }
-      });
+      } catch (error) {
+        alert("Erro ao excluir orquídea: " + error.message);
+      }
     }
   });
 
