@@ -22,7 +22,6 @@ export async function getOrchidById(req, res) {
 
 export async function createOrchid(req, res) {
   try {
-    console.log("POST /api/orchids body:", req.body);
     const { description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id } = req.body;
 
     const { imagePath, thumbnailPath } = await imageService.processUploadedImage(req.file, null);
