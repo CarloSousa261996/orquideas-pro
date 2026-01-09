@@ -7,7 +7,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const uploadsDir = path.join(__dirname, "../../www/images/orchids");
 const thumbsDir = path.join(uploadsDir, "thumbs");
 
-// Criar pastas se não existirem
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
@@ -21,7 +20,6 @@ const storage = multer.diskStorage({
     cb(null, uploadsDir);
   },
   filename: (req, file, cb) => {
-    // Usar o ID da orquídea (se disponível) ou um timestamp
     const orchidId = req.body.orchid_id || Date.now();
     const ext = path.extname(file.originalname);
     cb(null, `${orchidId}${ext}`);
@@ -29,7 +27,6 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  // Aceitar apenas imagens
   if (file.mimetype.startsWith("image/")) {
     cb(null, true);
   } else {
