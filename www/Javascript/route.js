@@ -6,8 +6,7 @@ import { OrchidDetailsPage } from "./pages/orchids-details.js";
 import { OrchidPage } from "./pages/orchids.js";
 import { AboutPage } from "./pages/about.js";
 
-
-export function navigateTo(url) {
+export async function navigateTo(url) {
   history.pushState(null, "", url);
   const main = document.getElementsByTagName("main")[0];
   const currentyContent = main.getElementsByClassName("content")[0];
@@ -29,7 +28,7 @@ export function navigateTo(url) {
   }
 
   if (new URLSearchParams(location.search).get("orchid-id")) {
-    main.replaceChild(OrchidDetailsPage(), currentyContent);
+    main.replaceChild(await OrchidDetailsPage(), currentyContent);
   }
 
   if (new URLSearchParams(location.search).get("new-orchid")) {

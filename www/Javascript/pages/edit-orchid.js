@@ -31,22 +31,29 @@ export function EditOrchidPage() {
   form.addEventListener("submit", (ev) => {
     ev.preventDefault();
 
-    data.orchid = data.orchid.map((o) => {
-      if (o.id === orchid.id) {
-        return {
-          ...orchid,
-          description: inputDescription.value,
-          genus: parseInt(form.elements[1].value),
-          type: parseInt(form.elements[2].value),
-          humidity: parseInt(form.elements[3].value),
-          temperature: parseInt(form.elements[4].value),
-          luminosity: parseInt(form.elements[6].value),
-        };
-      }
-      return o;
-    });
+    const updatedOrchid = {
+      description: inputDescription.value,
+      genus_id: parseInt(form.elements[1].value),
+      type_id: parseInt(form.elements[2].value),
+      humidity_id: parseInt(form.elements[3].value),
+      temperature_id: parseInt(form.elements[4].value),
+      size_id: parseInt(form.elements[5].value),
+      luminosity_id: parseInt(form.elements[6].value),
+    };
 
-    navigateTo(`?orchid-id=${orchid.id}`);
+    fetch(`/api/orchids/${orchid.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedOrchid),
+    })
+      .then((res) => {
+        if (res.ok) {
+          navigateTo(`?orchid-id=${orchid.id}`);
+        } else {
+          alert("Erro ao atualizar orquídea.");
+        }
+      })
+      .catch(() => alert("Erro ao atualizar orquídea."));
   });
 
   return Content("Editar Orquídea", form);

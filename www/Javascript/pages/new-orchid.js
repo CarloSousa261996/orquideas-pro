@@ -28,19 +28,29 @@ export function NewOrchidPage() {
     ev.preventDefault();
 
     const newOrchid = {
-      id: data.orchid.length + 1,
       description: inputDescription.value,
-      genus: parseInt(form.elements[1].value),
-      type: parseInt(form.elements[2].value),
-      humidity: parseInt(form.elements[3].value),
-      temperature: parseInt(form.elements[4].value),
-      size: parseInt(form.elements[5].value),
-      luminosity: parseInt(form.elements[6].value),
+      genus_id: parseInt(form.elements[1].value),
+      type_id: parseInt(form.elements[2].value),
+      humidity_id: parseInt(form.elements[3].value),
+      temperature_id: parseInt(form.elements[4].value),
+      size_id: parseInt(form.elements[5].value),
+      luminosity_id: parseInt(form.elements[6].value),
     };
 
-    data.orchid.push(newOrchid);
-    console.log(data.orchid);
-    navigateTo(`?orchid-id=${newOrchid.id}`);
+    fetch("/api/orchids", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newOrchid),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log({ data });
+        navigateTo(`?characteristic=all`);
+      })
+      .catch((err) => {
+        console.log({ err });
+        alert("Erro ao cadastrar orquídea.");
+      });
   });
 
   return Content("Cadastrar Nova Orquídea", form);

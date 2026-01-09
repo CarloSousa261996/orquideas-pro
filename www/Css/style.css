@@ -199,19 +199,19 @@ body {
 }
 
 #bulbophyllum {
-    background-image: url("/www/images/icons/bulbophyllum.png");
+    background-image: url("/images/icons/bulbophyllum.png");
 }
 #cattleya {
-    background-image: url("/www/images/icons/cattleya.png");
+    background-image: url("/images/icons/cattleya.png");
 }
 #cymbidium {
-    background-image: url("/www/images/icons/cymbidium.png");
+    background-image: url("/images/icons/cymbidium.png");
 }
 #paphiopedilum {
-    background-image: url("/www/images/icons/paphiopedilum.png");
+    background-image: url("/images/icons/paphiopedilum.png");
 }
 #phalaenopsis {
-    background-image: url("/www/images/icons/phalaenopsis.png");
+    background-image: url("/images/icons/phalaenopsis.png");
 }
 
 .orchid {
@@ -260,62 +260,62 @@ body {
 }
 
 .type-species {
-    background-image: url("/www/images/characteristic/type-species.png");
+    background-image: url("/images/characteristic/type-species.png");
 }
 .type-hybrid {
-    background-image: url("/www/images/characteristic/type-hybrid.png");
+    background-image: url("/images/characteristic/type-hybrid.png");
 }
 
 .luminosity-full-shade {
-    background-image: url("/www/images/characteristic/luminosity-full-shade.png");
+    background-image: url("/images/characteristic/luminosity-full-shade.png");
 }
 .luminosity-shaded-light {
-    background-image: url("/www/images/characteristic/luminosity-shaded-light.png");
+    background-image: url("/images/characteristic/luminosity-shaded-light.png");
 }
 .luminosity-filtered-light {
-    background-image: url("/www/images/characteristic/luminosity-filtered-light.png");
+    background-image: url("/images/characteristic/luminosity-filtered-light.png");
 }
 .luminosity-strong-light {
-    background-image: url("/www/images/characteristic/luminosity-strong-light.png");
+    background-image: url("/images/characteristic/luminosity-strong-light.png");
 }
 
 .temperature-cold {
-    background-image: url("/www/images/characteristic/temperature-cold.png");
+    background-image: url("/images/characteristic/temperature-cold.png");
 }
 .temperature-seasoned {
-    background-image: url("/www/images/characteristic/temperature-seasoned.png");
+    background-image: url("/images/characteristic/temperature-seasoned.png");
 }
 .temperature-hot {
-    background-image: url("/www/images/characteristic/temperature-hot.png");
+    background-image: url("/images/characteristic/temperature-hot.png");
 }
 .temperature-very-hot {
-    background-image: url("/www/images/characteristic/temperature-very-hot.png");
+    background-image: url("/images/characteristic/temperature-very-hot.png");
 }
 
 .humidity-lt40 {
-    background-image: url("/www/images/characteristic/humidity-lt40.png");
+    background-image: url("/images/characteristic/humidity-lt40.png");
 }
 .humidity-40-60 {
-    background-image: url("/www/images/characteristic/humidity-40-60.png");
+    background-image: url("/images/characteristic/humidity-40-60.png");
 }
 .humidity-60-80 {
-    background-image: url("/www/images/characteristic/humidity-60-80.png");
+    background-image: url("/images/characteristic/humidity-60-80.png");
 }
 .humidity-gt80 {
-    background-image: url("/www/images/characteristic/humidity-gt80.png");
+    background-image: url("/images/characteristic/humidity-gt80.png");
 }
 
 .size-miniature {
-    background-image: url("/www/images/characteristic/size-miniature.png");
+    background-image: url("/images/characteristic/size-miniature.png");
 }
 .size-small {
-    background-image: url("/www/images/characteristic/size-small.png");
+    background-image: url("/images/characteristic/size-small.png");
 }
 .size-medium {
-    background-image: url("/www/images/characteristic/size-medium.png");
+    background-image: url("/images/characteristic/size-medium.png");
 }
 .size-big {
-    background-image: url("/www/images/characteristic/size-big.png");
+    background-image: url("/images/characteristic/size-big.png");
 }
 
 .genera-back-link,

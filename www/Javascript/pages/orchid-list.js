@@ -1,14 +1,16 @@
 import { Content } from "../components/content.js";
-import { data } from "../data.js";
+import { fetchJson } from "../helper/fetch.js";
 import { navigateTo } from "../route.js";
 
 export function OrchidListPage() {
   const orchidList = document.createElement("div");
   orchidList.classList.add("orchid-list");
 
-  data.orchid.forEach((orchid) => {
-    const orchidItem = createOrchidItem(orchid);
-    orchidList.appendChild(orchidItem);
+  fetchJson("/api/orchids").then((orchids) => {
+    orchids.forEach((orchid) => {
+      const orchidItem = createOrchidItem(orchid);
+      orchidList.appendChild(orchidItem);
+    });
   });
 
   return Content("Lista de Orquídeas", orchidList);
@@ -19,7 +21,7 @@ function createOrchidItem(orchid) {
   item.classList.add("orchid-item");
 
   const image = document.createElement("img");
-  image.src = orchid.src;
+  image.src = orchid.image;
   image.alt = orchid.description;
 
   const description = document.createElement("p");
@@ -30,8 +32,8 @@ function createOrchidItem(orchid) {
   btnDetails.classList.add("btn");
   btnDetails.classList.add("btn-details");
 
-  btnDetails.addEventListener("click", () => {
-    navigateTo(`?orchid-id=${orchid.id}`);
+  btnDetails.addEventListener("click", async () => {
+    await navigateTo(`?orchid-id=${orchid.id}`);
   });
 
   const btnEdit = document.createElement("button");
@@ -49,10 +51,14 @@ function createOrchidItem(orchid) {
   btnDelete.classList.add("btn");
 
   btnDelete.addEventListener("click", () => {
-    const index = data.orchid.findIndex((o) => o.id === orchid.id);
-    if (index !== -1) {
-      data.orchid.splice(index, 1);
-      navigateTo("?characteristic=all");
+    if (confirm("Tem certeza que deseja excluir esta orquídea?")) {
+      fetch(`/api/orchids/${orchid.id}`, { method: "DELETE" }).then((res) => {
+        if (res.ok) {
+          navigateTo("?characteristic=all");
+        } else {
+          alert("Erro ao excluir orquídea.");
+        }
+      });
     }
   });
 

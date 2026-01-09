@@ -2,6 +2,7 @@ import express from "express";
 import favicon from "serve-favicon";
 import path from "path";
 import { fileURLToPath } from "url";
+import orchidsRouter from "./routes/orchids.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +22,9 @@ app.use((req, res, next) => {
 });
 
 // Routes
+
+app.use("/api/orchids", orchidsRouter);
+
 app.get("/api", (req, res) => {
   res.json({ message: "Orquideas Pro API" });
 });

@@ -11,15 +11,15 @@ export class Orchid {
   #size;
   #src;
 
-  constructor(id, description, genus, type, luminosity, temperature, humidity, size, src) {
+  constructor(id, description, genusId, typeId, luminosityId, temperatureId, humidityId, sizeId, src) {
     this.id = id;
     this.#description = description;
-    this.genus = data.genus.find(({ id }) => id === genus);
-    this.type = data.type.find(({ id }) => id === type);
-    this.luminosity = data.luminosity.find(({ id }) => id === luminosity);
-    this.temperature = data.temperature.find(({ id }) => id === temperature);
-    this.humidity = data.humidity.find(({ id }) => id === humidity);
-    this.size = data.size.find(({ id }) => id === size);
+    this.genus = data.genus.find(({ id }) => id === genusId);
+    this.type = data.type.find(({ id }) => id === typeId);
+    this.luminosity = data.luminosity.find(({ id }) => id === luminosityId);
+    this.temperature = data.temperature.find(({ id }) => id === temperatureId);
+    this.humidity = data.humidity.find(({ id }) => id === humidityId);
+    this.size = data.size.find(({ id }) => id === sizeId);
     this.#src = src;
   }
 

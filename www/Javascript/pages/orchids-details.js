@@ -1,22 +1,26 @@
 "use strict";
 import { Content } from "../components/content.js";
-import { data } from "../data.js";
+import { fetchJson } from "../helper/fetch.js";
 import { Orchid } from "../models/orchid.js";
 
-export function OrchidDetailsPage() {
+export async function OrchidDetailsPage() {
   const orchidId = new URLSearchParams(location.search).get("orchid-id") || "1";
-  const orchidData = data.orchid.find((orchid) => orchid.id === parseInt(orchidId));
+  const orchidData = await fetchJson(`/api/orchids/${orchidId}`);
+
+  console.log({ orchidData });
+  console.log({ orchidId });
+  if (!orchidData) alert("Orquidia não encontrada!");
 
   const orchid = new Orchid(
     orchidData.id,
     orchidData.description,
-    orchidData.genus,
-    orchidData.type,
-    orchidData.luminosity,
-    orchidData.temperature,
-    orchidData.humidity,
-    orchidData.size,
-    orchidData.src
+    orchidData.genus_id,
+    orchidData.type_id,
+    orchidData.luminosity_id,
+    orchidData.temperature_id,
+    orchidData.humidity_id,
+    orchidData.size_id,
+    orchidData.image
   );
 
   const orchidInfoSection = document.createElement("section");
