@@ -60,9 +60,7 @@ html {
     color: var(--root-secondary-color);
     transform: scale(1.5);  
     box-shadow: 0 0 20px  var(--root-background-color);
-
 }
-
 
 body {
     display: flex;
@@ -255,7 +253,7 @@ body {
 .orchid-photo {
     display: block;
     max-width: 50vw;
-    min-width: 35rem;
+    width: 35rem;
     max-height: calc((6 * (2 * var(--root-space) + (2 * var(--root-font-size)))));
     border-radius: var(--root-border-radius);
     object-fit: cover;

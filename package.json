@@ -1,0 +1,22 @@
+{
+  "name": "orquideas-pro-api",
+  "version": "1.0.0",
+  "description": "Backend API for Orquideas Pro",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "orchids",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.15.3",
+    "serve-favicon": "^2.5.1"
+  }
+}
