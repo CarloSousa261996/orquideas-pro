@@ -11,15 +11,27 @@ export class Orchid {
   #size;
   #src;
 
-  constructor(id, description, genusId, typeId, luminosityId, temperatureId, humidityId, sizeId, src) {
+  constructor(id, description, genusId, typeId, luminosityId, temperatureId, humidityId, sizeId, src, apiData = null) {
     this.id = id;
     this.#description = description;
-    this.genus = data.genus.find(({ id }) => id === genusId);
-    this.type = data.type.find(({ id }) => id === typeId);
-    this.luminosity = data.luminosity.find(({ id }) => id === luminosityId);
-    this.temperature = data.temperature.find(({ id }) => id === temperatureId);
-    this.humidity = data.humidity.find(({ id }) => id === humidityId);
-    this.size = data.size.find(({ id }) => id === sizeId);
+
+    // If apiData is provided (from API response), use it directly
+    if (apiData) {
+      this.genus = { id: genusId, description: apiData.genus };
+      this.type = { id: typeId, description: apiData.type };
+      this.luminosity = { id: luminosityId, description: apiData.luminosity };
+      this.temperature = { id: temperatureId, description: apiData.temperature };
+      this.humidity = { id: humidityId, description: apiData.humidity };
+      this.size = { id: sizeId, description: apiData.size };
+    } else {
+      // Fallback to data.js for backward compatibility
+      this.genus = data.genus.find(({ id }) => id === genusId);
+      this.type = data.type.find(({ id }) => id === typeId);
+      this.luminosity = data.luminosity.find(({ id }) => id === luminosityId);
+      this.temperature = data.temperature.find(({ id }) => id === temperatureId);
+      this.humidity = data.humidity.find(({ id }) => id === humidityId);
+      this.size = data.size.find(({ id }) => id === sizeId);
+    }
     this.#src = src;
   }
 

@@ -7,8 +7,6 @@ export async function OrchidDetailsPage() {
   const orchidId = new URLSearchParams(location.search).get("orchid-id") || "1";
   const orchidData = await fetchJson(`/api/orchids/${orchidId}`);
 
-  console.log({ orchidData });
-  console.log({ orchidId });
   if (!orchidData) alert("Orquidia não encontrada!");
 
   const orchid = new Orchid(

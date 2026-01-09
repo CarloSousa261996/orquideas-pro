@@ -2,6 +2,7 @@ import { Content } from "../components/content.js";
 import { Select } from "../components/select.js";
 import { data } from "../data.js";
 import { navigateTo } from "../route.js";
+import { fetchJson } from "../helper/fetch.js";
 
 export function NewOrchidPage() {
   const form = document.createElement("form");
@@ -11,11 +12,17 @@ export function NewOrchidPage() {
   inputDescription.setAttribute("type", "text");
   inputDescription.setAttribute("placeholder", "Descrição da Orquídea");
 
+  const inputImage = document.createElement("input");
+  inputImage.setAttribute("type", "file");
+  inputImage.setAttribute("accept", "image/*");
+  inputImage.setAttribute("placeholder", "Selecionar imagem");
+
   const createBtn = document.createElement("button");
   createBtn.classList.add("btn");
   createBtn.textContent = "Salvar";
 
   form.appendChild(inputDescription);
+  form.appendChild(inputImage);
   form.appendChild(Select(data.genus, "Género"));
   form.appendChild(Select(data.type, "Tipo"));
   form.appendChild(Select(data.humidity, "Humidade"));
@@ -24,33 +31,36 @@ export function NewOrchidPage() {
   form.appendChild(Select(data.luminosity, "Luminosidade"));
   form.appendChild(createBtn);
 
-  form.addEventListener("submit", (ev) => {
+  form.addEventListener("submit", async (ev) => {
     ev.preventDefault();
 
-    const newOrchid = {
-      description: inputDescription.value,
-      genus_id: parseInt(form.elements[1].value),
-      type_id: parseInt(form.elements[2].value),
-      humidity_id: parseInt(form.elements[3].value),
-      temperature_id: parseInt(form.elements[4].value),
-      size_id: parseInt(form.elements[5].value),
-      luminosity_id: parseInt(form.elements[6].value),
-    };
+    const formData = new FormData();
+    formData.append("description", inputDescription.value);
+    formData.append("genus_id", parseInt(form.elements[2].value));
+    formData.append("type_id", parseInt(form.elements[3].value));
+    formData.append("humidity_id", parseInt(form.elements[4].value));
+    formData.append("temperature_id", parseInt(form.elements[5].value));
+    formData.append("size_id", parseInt(form.elements[6].value));
+    formData.append("luminosity_id", parseInt(form.elements[7].value));
 
-    fetch("/api/orchids", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newOrchid),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log({ data });
-        navigateTo(`?characteristic=all`);
-      })
-      .catch((err) => {
-        console.log({ err });
-        alert("Erro ao cadastrar orquídea.");
+    if (inputImage.files.length > 0) {
+      formData.append("image", inputImage.files[0]);
+    }
+
+    try {
+      const result = await fetchJson("/api/orchids", {
+        method: "POST",
+        body: formData,
       });
+      if (result && result.id) {
+        navigateTo(`?characteristic=all`);
+      } else {
+        alert("Erro ao cadastrar orquídea.");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Erro ao cadastrar orquídea: " + err.message);
+    }
   });
 
   return Content("Cadastrar Nova Orquídea", form);

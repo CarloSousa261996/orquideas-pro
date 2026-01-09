@@ -1,18 +1,30 @@
-export async function fetchJson(url, method = "GET", body) {
-  let options = {
-    method: method,
+export async function fetchJson(url, options = {}) {
+  const defaultOptions = {
+    method: options.method || "GET",
     headers: {
       Accept: "application/json",
+      ...options.headers,
     },
   };
-  if (body) {
-    options.body = JSON.stringify(body);
-    options.headers["Content-Type"] = "application/json";
+
+  // If body is FormData, don't set Content-Type (browser handles it)
+  if (options.body instanceof FormData) {
+    delete defaultOptions.headers["Content-Type"];
+    defaultOptions.body = options.body;
+  } else if (options.body) {
+    defaultOptions.body = JSON.stringify(options.body);
+    defaultOptions.headers["Content-Type"] = "application/json";
   }
+
   try {
-    let response = await fetch(url, options);
-    return response.ok ? await response.json() : void 0;
+    const response = await fetch(url, defaultOptions);
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ error: response.statusText }));
+      throw new Error(errorData.error || `HTTP ${response.status}`);
+    }
+    return await response.json();
   } catch (error) {
-    return void 0;
+    console.error("Fetch error:", error);
+    throw error;
   }
 }
