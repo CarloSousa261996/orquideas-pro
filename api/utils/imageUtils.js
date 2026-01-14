@@ -11,14 +11,12 @@ export async function generateThumbnail(imagePath) {
     const filename = path.basename(imagePath);
     const thumbDir = path.join(dir, "thumbs");
 
-    // Criar pasta de thumbnails se não existir
     if (!fs.existsSync(thumbDir)) {
       fs.mkdirSync(thumbDir, { recursive: true });
     }
 
     const thumbPath = path.join(thumbDir, filename);
 
-    // Gerar thumbnail
     await sharp(imagePath)
       .resize(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT, {
         fit: "cover",

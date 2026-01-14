@@ -3,8 +3,6 @@ import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 export async function processUploadedImage(file, orchidId) {
   if (!file) return { imagePath: null, thumbnailPath: null };
 
