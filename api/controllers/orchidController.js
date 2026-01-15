@@ -1,18 +1,36 @@
 import * as orchidService from "../services/orchidService.js";
 import * as imageService from "../services/imageService.js";
 
+/**
+ * Retorna todas as orquídeas.
+ * @returns {Promise<Array<Orchid>>} Uma promessa que resolve com um array de objetos Orchid.
+ */
 export async function getAllOrchids(req, res) {
   try {
+    /* eslint-disable-next-line no-unused-vars */
     const orchids = await orchidService.getAllOrchids();
     res.json(orchids);
   } catch (err) {
+
+    /* eslint-disable-next-line no-unused-vars */
     res.status(500).json({ error: "Erro ao buscar orquídeas", details: err.message });
   }
 }
 
+/**
+ * Retorna uma orquídea com base no seu ID.
+ * @param {Request} req - Uma requisição com um parâmetro "id" contendo o ID da orquídea.
+ * @param {Response} res - Uma resposta que será enviada com os dados da orquídea.
+ * @returns {Promise<Response>} Uma promessa que resolve com uma resposta contendo os dados da orquídea.
+ * @throws {Error} Se houver um erro ao buscar a orquídea.
+ */
 export async function getOrchidById(req, res) {
   try {
+
+    /* eslint-disable-next-line no-unused-vars */
     const orchid = await orchidService.getOrchidById(req.params.id);
+
+    /* eslint-disable-next-line no-unused-vars */
     if (!orchid) return res.status(404).json({ error: "Orquídea não encontrada" });
     res.json(orchid);
   } catch (err) {
@@ -20,8 +38,27 @@ export async function getOrchidById(req, res) {
   }
 }
 
+/**
+ * Cria uma nova orquídea com base nos dados enviados na requisição.
+ * Se houver um arquivo de imagem na requisição, ele será processado e salvo na pasta de imagens.
+ * Se a imagem for salva com sucesso, a URL da imagem será atualizada na base de dados.
+ * @param {Request} req - Uma requisição com os dados da orquídea.
+ * @param {Response} res - Uma resposta que será enviada com os dados da orquídea.
+ * @returns {Promise<Response>} Uma promessa que resolve com uma resposta contendo os dados da orquídea.
+ * @throws {Error} Se houver um erro ao criar a orquídea.
+ */
 export async function createOrchid(req, res) {
   try {
+
+    /**
+     * @type {string}
+     * @description Descrição da orquídea.
+     * @required
+     * @example "Orquídea 1"
+     * @type {number}
+     * @description ID do gênero da orquídea.
+     * @required
+     */
     const { description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id } = req.body;
 
     const { imagePath, thumbnailPath } = await imageService.processUploadedImage(req.file, null);
@@ -43,6 +80,15 @@ export async function createOrchid(req, res) {
   }
 }
 
+/**
+ * Atualiza uma orquídea com base nos dados enviados na requisição.
+ * Se houver um arquivo de imagem na requisição, ele será processado e salvo na pasta de imagens.
+ * Se a imagem for salva com sucesso, a URL da imagem será atualizada na base de dados.
+ * @param {Request} req - Uma requisição com os dados da orquídea.
+ * @param {Response} res - Uma resposta que será enviada com os dados da orquídea.
+ * @returns {Promise<Response>} Uma promessa que resolve com uma resposta contendo os dados da orquídea.
+ * @throws {Error} Se houver um erro ao atualizar a orquídea.
+ */
 export async function updateOrchid(req, res) {
   try {
     const { description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id } = req.body;
@@ -61,6 +107,14 @@ export async function updateOrchid(req, res) {
     res.status(500).json({ error: "Erro ao atualizar orquídea", details: err.message });
   }
 }
+
+/**
+ * Remove uma orquídea com base no seu ID.
+ * @param {Request} req - Uma requisição com um parâmetro "id" contendo o ID da orquídea.
+ * @param {Response} res - Uma resposta que será enviada com os dados da orquídea.
+ * @returns {Promise<Response>} Uma promessa que resolve com uma resposta contendo os dados da orquídea.
+ * @throws {Error} Se houver um erro ao remover a orquídea.
+ */
 
 export async function deleteOrchid(req, res) {
   try {

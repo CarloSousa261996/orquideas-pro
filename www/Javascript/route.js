@@ -6,6 +6,11 @@ import { OrchidDetailsPage } from "./pages/orchids-details.js";
 import { OrchidPage } from "./pages/orchids.js";
 import { AboutPage } from "./pages/about.js";
 
+/**
+ * Navega para uma página com base na URL
+ * @param {string} url - URL da página que deseja navegar
+ * @returns {Promise<void>} - Promise que resolve quando a navega o terminar
+ */
 export async function navigateTo(url) {
   history.pushState(null, "", url);
   const main = document.getElementsByTagName("main")[0];

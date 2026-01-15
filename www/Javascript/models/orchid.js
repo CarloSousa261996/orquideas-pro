@@ -11,6 +11,19 @@ export class Orchid {
   #size;
   #src;
 
+  /**
+   * Construtor da classe Orchid.
+   * @param {number} id - ID da orquídea.
+   * @param {string} description - Descrição da orquídea.
+   * @param {number} genusId - ID do gênero.
+   * @param {number} typeId - ID do tipo.
+   * @param {number} luminosityId - ID da luminosidade.
+   * @param {number} temperatureId - ID da temperatura.
+   * @param {number} humidityId - ID da umidade.
+   * @param {number} sizeId - ID do tamanho.
+   * @param {string} src - URL da imagem.
+   * @param {object} apiData - Dados opcionais da resposta da API.
+   */
   constructor(id, description, genusId, typeId, luminosityId, temperatureId, humidityId, sizeId, src, apiData = null) {
     this.id = id;
     this.#description = description;
@@ -35,10 +48,19 @@ export class Orchid {
     this.#src = src;
   }
 
+  /**
+   * Retorna a descrição da orquídea.
+   * @returns {string} A descrição da orquídea.
+   */
   get description() {
     return this.#description;
   }
 
+  /**
+   * Cria um elemento de rótulo para uma característica da orquídea.
+   * @param {string} characteristic - O nome da característica.
+   * @returns {HTMLSpanElement} Um elemento de rótulo para a característica fornecida.
+   */
   createLabel(characteristic) {
     const orchidCharacteristicLabel = document.createElement("span");
     orchidCharacteristicLabel.classList.add("label");
@@ -46,6 +68,14 @@ export class Orchid {
     return orchidCharacteristicLabel;
   }
 
+  /**
+   * Cria um elemento de valor para uma característica da orquídea.
+   * @param {string} characteristic - O nome da característica.
+   * @returns {HTMLSpanElement} Um elemento de valor para a característica fornecida.
+   * O elemento terá a classe do nome da característica e se a característica
+   * estiver presente em DATA_RESTORE, também terá a classe do nome da característica seguida
+   * pela descrição da característica.
+   */
   createValue(characteristic) {
     const orchidCharacteristicValue = document.createElement("span");
     orchidCharacteristicValue.textContent = this[characteristic].description;
@@ -59,11 +89,23 @@ export class Orchid {
     return orchidCharacteristicValue;
   }
 
+/**
+ * Retorna um nome de classe CSS que representa uma característica da orquídea.
+ * O nome da classe está no formato "{característica}-{descrição}".
+ * Se a característica não for encontrada em DATA_RESTORE, retorna "none".
+ * @param {string} characteristic - O nome da característica.
+ * @param {number} characteristicId - O ID da característica.
+ * @returns {string} Um nome de classe CSS que representa uma característica da orquídea.
+ */
   static getCharacteristicClass(characteristic, characteristicId) {
     if (!DATA_RESTORE[characteristic]) return "none";
     return `${characteristic}-${DATA_RESTORE[characteristic].find(({ id }) => id === characteristicId).description}`;
   }
 
+  /**
+   * Retorna um elemento HTML img com a classe "orchid-photo" e o atributo src definido para o valor da propriedade "#src".
+   * @returns {HTMLImageElement} Um elemento HTML img com a classe "orchid-photo" e o atributo src definido para o valor da propriedade "#src".
+   */
   image() {
     const orchidPhoto = document.createElement("img");
     orchidPhoto.classList.add("orchid-photo");
@@ -72,6 +114,17 @@ export class Orchid {
     return orchidPhoto;
   }
 
+  /**
+   * Retorna um objeto com as características da orquídea como chaves e seus nomes como valores.
+   * As características são:
+   * - genus: Gênero
+   * - type: Tipo
+   * - luminosity: Luminosidade
+   * - temperature: Temperatura
+   * - humidity: Humidade
+   * - size: Tamanho
+   * @returns {Object} Um objeto com as características da orquídea como chaves e seus nomes como valores.
+   */
   static get characteristics() {
     return {
       genus: "Género",

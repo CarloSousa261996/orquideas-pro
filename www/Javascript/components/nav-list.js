@@ -1,5 +1,18 @@
 import { navigateTo } from "../route.js";
 
+/**
+ * Cria um elemento ul com op es de navega o para caracter sticas de orqu deas.
+ * As op es s o:
+ * - G nero
+ * - Tipo
+ * - Luminosidade
+ * - Tamanho
+ * - Humidade
+ * - Temperatura
+ * - Todas
+ * Cada op o  um link que navega para a p gina com a lista de orqu deas que possuem a caracter stica espec fica.
+ * @returns {HTMLElement} Um elemento ul com op es de navega o para caracter sticas de orqu deas.
+*/
 export const NavList = () => {
   const navUl = document.createElement("ul");
 

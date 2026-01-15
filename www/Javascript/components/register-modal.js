@@ -1,3 +1,10 @@
+/**
+ * Cria um elemento modal para registrar um novo usuário.
+ * O modal contém um formulário com campos de entrada para nome de usuário, email, senha e termos e condições.
+ * Quando o formulário é enviado, os dados são registrados no console.
+ * O modal pode ser fechado clicando no botão fechar ou clicando fora do modal.
+ * @returns {HTMLElement} Um elemento modal com o formulário de registro.
+ */
 export const RegisterModal = () => {
   const modal = document.createElement("div");
   modal.classList.add("modal-register");

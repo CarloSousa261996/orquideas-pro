@@ -5,6 +5,13 @@ import fs from "fs";
 const THUMBNAIL_WIDTH = 200;
 const THUMBNAIL_HEIGHT = 200;
 
+/**
+ * Gera um thumbnail da imagem fornecida e o retorna como uma URL
+ * relativa à pasta de imagens.
+ * @param {string} imagePath - O caminho da imagem a ser processada.
+ * @returns {Promise<string|null>} - Uma promessa que se resolve com a URL
+ * do thumbnail ou null caso haja um erro.
+ */
 export async function generateThumbnail(imagePath) {
   try {
     const dir = path.dirname(imagePath);
@@ -33,6 +40,12 @@ export async function generateThumbnail(imagePath) {
   }
 }
 
+/**
+ * Deleta a imagem fornecida pelo caminho imagePath.
+ * Se a imagem não existir, não faz nada.
+ * Se houver um erro ao deletar a imagem, imprime uma mensagem de erro.
+ * @param {string} imagePath - O caminho da imagem a ser deletada.
+ */
 export function deleteImageFile(imagePath) {
   try {
     if (imagePath && fs.existsSync(imagePath)) {
@@ -43,6 +56,12 @@ export function deleteImageFile(imagePath) {
   }
 }
 
+/**
+ * Deleta o thumbnail fornecido pelo caminho thumbPath.
+ * Se o thumbnail não existir, não faz nada.
+ * Se houver um erro ao deletar o thumbnail, imprime uma mensagem de erro.
+ * @param {string} thumbPath - O caminho do thumbnail a ser deletado.
+ */
 export function deleteThumbnailFile(thumbPath) {
   try {
     if (thumbPath && fs.existsSync(thumbPath)) {

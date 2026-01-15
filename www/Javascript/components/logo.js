@@ -1,3 +1,7 @@
+/**
+ * Cria um elemento div com um id "logo" e contém um span com o texto "PRO" e o texto "Orquideas".
+ * @returns {HTMLElement} O elemento div com o id "logo".
+ */
 export const Logo = () => {
   const logo = document.createElement("div");
   logo.setAttribute("id", "logo");

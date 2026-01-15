@@ -1,6 +1,12 @@
 import { navigateTo } from "../route.js";
 import { Logo } from "./logo.js";
 
+/**
+ * Cria um elemento header com o logotipo e um menu de navega o.
+ * O menu de navega o cont m op es de caracter sticas de orqu deas.
+ * Cada op o  um link que navega para a p gina com a lista de orqu deas que possuem a caracter stica espec fica.
+ * @returns {HTMLElement} O elemento header com o logotipo e o menu de navega o.
+ */
 export const Header = () => {
   const header = document.createElement("header");
   const logo = Logo();

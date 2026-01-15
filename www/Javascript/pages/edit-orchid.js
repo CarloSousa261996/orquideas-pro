@@ -4,6 +4,13 @@ import { data } from "../data.js";
 import { navigateTo } from "../route.js";
 import { fetchJson } from "../helper/fetch.js";
 
+/**
+ * Página de edição de orquídea.
+ * Renderiza a página com um formulário para editar uma orquídea.
+ * Busca a orquídea da API com base no ID passado na URL e então cria uma página com um formulário para editar a orquídea.
+ * Se houver um erro, ele exibirá uma mensagem de erro em vez disso.
+ * @returns {Content} Uma página com um formulário para editar a orquídea.
+ */ 
 export function EditOrchidPage() {
   const form = document.createElement("form");
   form.classList.add("new-orchid-form");

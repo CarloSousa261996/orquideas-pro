@@ -1,5 +1,9 @@
 import { Logo } from "./logo.js";
 
+/**
+ * Cria um elemento footer com o logotipo e links para as redes sociais da Tecnologia Setubal.
+ * @returns {HTMLElement} O elemento footer com o logotipo e links para as redes sociais da Tecnologia Setubal.
+ */
 export function Footer() {
   const footer = document.createElement("footer");
 

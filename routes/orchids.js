@@ -2,6 +2,7 @@ import express from "express";
 import upload from "../api/middleware/upload.js";
 import { getAllOrchids, getOrchidById, createOrchid, updateOrchid, deleteOrchid } from "../api/controllers/orchidController.js";
 
+// Cria o roteador
 const router = express.Router();
 
 // Rotas para orquídeas
