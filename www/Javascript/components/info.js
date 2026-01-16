@@ -1,3 +1,9 @@
+/**
+ * Cria um elemento section com as informações de contato e um formulário para enviar uma mensagem.
+ * O elemento section contém dois blocos de contato com informações de nome, telefone e email, e um formulário com campos de entrada para nome, email e mensagem.
+ * O formulário contém um botão para enviar a mensagem.
+ * @returns {HTMLElement} O elemento section com as informações de contato e o formulário para enviar uma mensagem.
+ */
 export const Info = () => {
   const section = document.createElement("section");
   section.classList.add("contact-section");

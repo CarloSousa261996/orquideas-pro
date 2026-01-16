@@ -1,5 +1,12 @@
 import { Footer } from "./footer.js";
 
+/**
+ * Cria um elemento div com a classe "content" e um título.
+ * Recebe um título e uma lista de elementos a serem adicionados ao elemento div.
+ * @param {String} title - O título a ser exibido.
+ * @param {...HTMLElement} component - Os elementos a serem adicionados ao elemento div.
+ * @returns {HTMLElement} O elemento div com o título e os elementos adicionados.
+ */
 export function Content(title, ...component) {
   const content = document.createElement("div");
   content.classList.add("content");

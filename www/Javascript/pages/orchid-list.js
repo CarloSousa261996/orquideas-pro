@@ -2,6 +2,12 @@ import { Content } from "../components/content.js";
 import { fetchJson } from "../helper/fetch.js";
 import { navigateTo } from "../route.js";
 
+/**
+ * Retorna uma página com uma lista de orquídeas.
+ * Busca a lista de orquídeas da API e então cria uma página com uma lista de orquídeas.
+ * Se houver um erro, ele exibirá uma mensagem de erro em vez disso.
+ * @returns {Content} Uma página com uma lista de orquídeas.
+ */
 export function OrchidListPage() {
   const orchidList = document.createElement("div");
   orchidList.classList.add("orchid-list");
@@ -23,6 +29,11 @@ export function OrchidListPage() {
   return Content("Lista de Orquídeas", orchidList);
 }
 
+/**
+ * Cria um item da lista de orquídeas com as informações da orquídea e botões para ver detalhes, editar e excluir.
+ * @param {Orchid} orchid - A orquídea a ser renderizada.
+ * @returns {HTMLElement} Um item da lista de orquídeas com as informações da orquídea e botões para ver detalhes, editar e excluir.
+*/
 function createOrchidItem(orchid) {
   const item = document.createElement("div");
   item.classList.add("orchid-item");

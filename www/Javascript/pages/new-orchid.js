@@ -4,6 +4,11 @@ import { data } from "../data.js";
 import { navigateTo } from "../route.js";
 import { fetchJson } from "../helper/fetch.js";
 
+/**
+ * Função para criar uma nova orquídea.
+ *
+ * @returns {Content} - O conteúdo da página.
+ */
 export function NewOrchidPage() {
   const form = document.createElement("form");
   form.classList.add("new-orchid-form");

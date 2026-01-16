@@ -2,6 +2,12 @@ import { Content } from "../components/content.js";
 import { data } from "../data.js";
 import { navigateTo } from "../route.js";
 
+/**
+ * Página de lista de orquídeas, filtrada por caractéristica
+ * @param {String} [orchidCharacteristic=genus] Caractéristica de filtro
+ * @param {Number} [orchidCharacteristicId=1] ID da caractéristica de filtro
+ * @returns {Content} Página com lista de orquídeas e link de volta para a página de detalhes
+ */
 export function OrchidPage() {
   const orchidCharacteristic = new URLSearchParams(location.search).get("characteristic") || "genus";
   const orchidCharacteristicId = parseInt(new URLSearchParams(location.search).get("characteristic-id")) || 1;

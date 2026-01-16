@@ -3,6 +3,10 @@ import { Content } from "../components/content.js";
 import { fetchJson } from "../helper/fetch.js";
 import { Orchid } from "../models/orchid.js";
 
+/**
+ * Renderiza a página com detalhes de uma orquídea.
+ * @returns {Promise<Content>} Uma promessa que resolve com um objeto Content representando a página com detalhes de uma orquídea.
+ */
 export async function OrchidDetailsPage() {
   const orchidId = new URLSearchParams(location.search).get("orchid-id") || "1";
   const orchidData = await fetchJson(`/api/orchids/${orchidId}`);

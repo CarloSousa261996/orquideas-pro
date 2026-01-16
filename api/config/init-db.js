@@ -5,6 +5,11 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+/**
+ * Inicializa o banco de dados criando-o, criando o schema e preenchendo-o com dados iniciais.
+ * Esta função é idempotente e não lançará um erro se o banco de dados já existir.
+ * @returns {Promise<boolean>} Uma promessa que se resolve com true se o banco de dados foi inicializado com sucesso, ou false se um erro ocorreu.
+ */
 const initDatabase = async () => {
   try {
     // Connection without database to create it
