@@ -1,17 +1,16 @@
-import * as orchidService from "../services/orchidService.js";
+import { OrchidService } from "../services/orchidService.js";
 import * as imageService from "../services/imageService.js";
 
+const orchidService = new OrchidService();
 /**
  * Retorna todas as orquídeas.
  * @returns {Promise<Array<Orchid>>} Uma promessa que resolve com um array de objetos Orchid.
  */
 export async function getAllOrchids(req, res) {
   try {
-    /* eslint-disable-next-line no-unused-vars */
-    const orchids = await orchidService.getAllOrchids();
+    const orchids = await orchidService.getAll();
     res.json(orchids);
   } catch (err) {
-
     /* eslint-disable-next-line no-unused-vars */
     res.status(500).json({ error: "Erro ao buscar orquídeas", details: err.message });
   }
@@ -26,11 +25,8 @@ export async function getAllOrchids(req, res) {
  */
 export async function getOrchidById(req, res) {
   try {
+    const orchid = await orchidService.getById(req.params.id);
 
-    /* eslint-disable-next-line no-unused-vars */
-    const orchid = await orchidService.getOrchidById(req.params.id);
-
-    /* eslint-disable-next-line no-unused-vars */
     if (!orchid) return res.status(404).json({ error: "Orquídea não encontrada" });
     res.json(orchid);
   } catch (err) {
@@ -49,7 +45,6 @@ export async function getOrchidById(req, res) {
  */
 export async function createOrchid(req, res) {
   try {
-
     /**
      * @type {string}
      * @description Descrição da orquídea.
@@ -63,7 +58,7 @@ export async function createOrchid(req, res) {
 
     const { imagePath, thumbnailPath } = await imageService.processUploadedImage(req.file, null);
 
-    const orchidId = await orchidService.createOrchid(description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, imagePath);
+    const orchidId = await orchidService.create(description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, imagePath);
 
     let finalImagePath = imagePath;
     let finalThumbnailPath = thumbnailPath;
@@ -71,7 +66,7 @@ export async function createOrchid(req, res) {
       const { imagePath: correctedPath, thumbnailPath: correctedThumb } = await imageService.processUploadedImage(req.file, orchidId);
       finalImagePath = correctedPath;
       finalThumbnailPath = correctedThumb;
-      await orchidService.updateOrchidImage(orchidId, correctedPath);
+      await orchidService.updateImage(orchidId, correctedPath);
     }
 
     res.status(201).json({ id: orchidId, image: finalImagePath, thumbnail: finalThumbnailPath });
@@ -99,7 +94,7 @@ export async function updateOrchid(req, res) {
       imagePath = path;
     }
 
-    const updated = await orchidService.updateOrchid(req.params.id, description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, imagePath);
+    const updated = await orchidService.update(req.params.id, description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, imagePath);
 
     if (!updated) return res.status(404).json({ error: "Orquídea não encontrada" });
     res.json({ success: true, image: imagePath });
@@ -120,7 +115,7 @@ export async function deleteOrchid(req, res) {
   try {
     const imagePath = await orchidService.getOrchidImage(req.params.id);
 
-    const deleted = await orchidService.deleteOrchid(req.params.id);
+    const deleted = await orchidService.delete(req.params.id);
     if (!deleted) return res.status(404).json({ error: "Orquídea não encontrada" });
 
     imageService.deleteOrchidImages(imagePath);

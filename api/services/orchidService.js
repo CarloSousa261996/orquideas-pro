@@ -1,4 +1,4 @@
-import { OrchidDAO } from "../dao/orchidDAO";
+import { OrchidDAO } from "../dao/orchidDAO.js";
 
 export class OrchidService {
   #orchidDAO;
