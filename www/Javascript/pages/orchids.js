@@ -1,6 +1,7 @@
 import { Content } from "../components/content.js";
-import { data } from "../data.js";
+import { getAllCharacteristics } from "../helper/characteristics.js";
 import { navigateTo } from "../route.js";
+import { fetchJson } from "../helper/fetch.js";
 
 /**
  * Página de lista de orquídeas, filtrada por caractéristica
@@ -8,31 +9,43 @@ import { navigateTo } from "../route.js";
  * @param {Number} [orchidCharacteristicId=1] ID da caractéristica de filtro
  * @returns {Content} Página com lista de orquídeas e link de volta para a página de detalhes
  */
-export function OrchidPage() {
+export async function OrchidPage() {
   const orchidCharacteristic = new URLSearchParams(location.search).get("characteristic") || "genus";
   const orchidCharacteristicId = parseInt(new URLSearchParams(location.search).get("characteristic-id")) || 1;
 
-  const characteristic = data[orchidCharacteristic].find((genus) => genus.id === orchidCharacteristicId);
-  const orchids = data.orchid.filter((orchid) => orchid.genus === orchidCharacteristicId);
+  try {
+    const [allOrchids, characteristics] = await Promise.all([
+      fetchJson("/api/orchids"),
+      getAllCharacteristics()
+    ]);
 
-  const orchidList = document.createElement("ul");
-  orchidList.classList.add("orchid-list");
+    const characteristic = characteristics[orchidCharacteristic].find((genus) => genus.id === orchidCharacteristicId);
+    const orchids = allOrchids.filter((orchid) => orchid[`${orchidCharacteristic}_id`] === orchidCharacteristicId);
 
-  orchids.forEach((item) => {
-    const li = document.createElement("li");
-    li.classList.add("orchid-item");
-    const a = document.createElement("a");
-    a.textContent = item.description;
-    a.classList.add("orchid-link");
-    li.appendChild(a);
-    li.addEventListener("click", () => {
-      navigateTo(`?orchid-id=${item.id}`);
+    const orchidList = document.createElement("ul");
+    orchidList.classList.add("orchid-list");
+
+    orchids.forEach((item) => {
+      const li = document.createElement("li");
+      li.classList.add("orchid-item");
+      const a = document.createElement("a");
+      a.textContent = item.description;
+      a.classList.add("orchid-link");
+      li.appendChild(a);
+      li.addEventListener("click", () => {
+        navigateTo(`?orchid-id=${item.id}`);
+      });
+      orchidList.appendChild(li);
     });
-    orchidList.appendChild(li);
-  });
 
-  const genusLink = document.createElement("a");
-  genusLink.textContent = characteristic.description;
-  genusLink.classList.add("genera-back-link");
-  return Content(characteristic.description, orchidList, genusLink);
+    const genusLink = document.createElement("a");
+    genusLink.textContent = characteristic.description;
+    genusLink.classList.add("genera-back-link");
+    return Content(characteristic.description, orchidList, genusLink);
+  } catch (error) {
+    console.error("Erro ao carregar dados:", error);
+    const errorDiv = document.createElement("div");
+    errorDiv.textContent = "Erro ao carregar orquídeas";
+    return Content("Erro", errorDiv);
+  }
 }

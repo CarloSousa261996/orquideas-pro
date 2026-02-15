@@ -21,15 +21,15 @@ export async function navigateTo(url) {
   }
 
   if (new URLSearchParams(location.search).get("orchid-id") && new URLSearchParams(location.search).get("edit")) {
-    main.replaceChild(EditOrchidPage(), currentyContent);
+    main.replaceChild(await EditOrchidPage(), currentyContent);
   }
 
   if (new URLSearchParams(location.search).get("characteristic") && !new URLSearchParams(location.search).get("characteristic-id")) {
-    main.replaceChild(CharacteristicPage(), currentyContent);
+    main.replaceChild(await CharacteristicPage(), currentyContent);
   }
 
   if (new URLSearchParams(location.search).get("characteristic-id")) {
-    main.replaceChild(OrchidPage(), currentyContent);
+    main.replaceChild(await OrchidPage(), currentyContent);
   }
 
   if (new URLSearchParams(location.search).get("orchid-id")) {
@@ -37,7 +37,7 @@ export async function navigateTo(url) {
   }
 
   if (new URLSearchParams(location.search).get("new-orchid")) {
-    main.replaceChild(NewOrchidPage(), currentyContent);
+    main.replaceChild(await NewOrchidPage(), currentyContent);
   }
 
   if (new URLSearchParams(location.search).get("about")) {

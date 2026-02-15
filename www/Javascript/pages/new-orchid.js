@@ -1,6 +1,6 @@
 import { Content } from "../components/content.js";
 import { Select } from "../components/select.js";
-import { data } from "../data.js";
+import { getAllCharacteristics } from "../helper/characteristics.js";
 import { navigateTo } from "../route.js";
 import { fetchJson } from "../helper/fetch.js";
 
@@ -9,7 +9,9 @@ import { fetchJson } from "../helper/fetch.js";
  *
  * @returns {Content} - O conteúdo da página.
  */
-export function NewOrchidPage() {
+export async function NewOrchidPage() {
+  const characteristics = await getAllCharacteristics();
+  
   const form = document.createElement("form");
   form.classList.add("new-orchid-form");
 
@@ -28,12 +30,12 @@ export function NewOrchidPage() {
 
   form.appendChild(inputDescription);
   form.appendChild(inputImage);
-  form.appendChild(Select(data.genus, "Género"));
-  form.appendChild(Select(data.type, "Tipo"));
-  form.appendChild(Select(data.humidity, "Humidade"));
-  form.appendChild(Select(data.temperature, "Temperatura"));
-  form.appendChild(Select(data.size, "Tamanho"));
-  form.appendChild(Select(data.luminosity, "Luminosidade"));
+  form.appendChild(Select(characteristics.genus, "Género"));
+  form.appendChild(Select(characteristics.type, "Tipo"));
+  form.appendChild(Select(characteristics.humidity, "Humidade"));
+  form.appendChild(Select(characteristics.temperature, "Temperatura"));
+  form.appendChild(Select(characteristics.size, "Tamanho"));
+  form.appendChild(Select(characteristics.luminosity, "Luminosidade"));
   form.appendChild(createBtn);
 
   form.addEventListener("submit", async (ev) => {

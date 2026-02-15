@@ -13,7 +13,7 @@ import { RegisterModal } from "./components/register-modal.js";
  * Adiciona o evento de resize para fechar o menu
  * quando a janela tem mais de 760px de largura.
  */
-function init() {
+async function init() {
   const main = document.createElement("main");
   main.classList.add("container");
   const menuToggle = document.createElement("button");
@@ -28,7 +28,7 @@ function init() {
   });
 
   main.appendChild(headerEl);
-  main.appendChild(CharacteristicPage());
+  main.appendChild(await CharacteristicPage());
   main.appendChild(Footer());
   document.body.appendChild(main);
 

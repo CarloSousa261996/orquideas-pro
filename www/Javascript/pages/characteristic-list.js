@@ -1,5 +1,5 @@
 import { Content } from "../components/content.js";
-import { data } from "../data.js";
+import { getAllCharacteristics } from "../helper/characteristics.js";
 import { Orchid } from "../models/orchid.js";
 import { navigateTo } from "../route.js";
 
@@ -10,15 +10,17 @@ import { navigateTo } from "../route.js";
  * Cada item da lista é um link que navega para a página com a lista de orquídeas que possuem a característica específica.
  * @returns {Promise<Content>} - Uma promessa que resolve com um objeto Content representando a página com a lista de características de orquídeas.
  */
-export function CharacteristicPage() {
+export async function CharacteristicPage() {
   const currentyCharacteristic = new URLSearchParams(location.search).get("characteristic") || "genus";
-
+  
+  const characteristics = await getAllCharacteristics();
+  
   const homeUl = document.createElement("ul");
   homeUl.classList.add("genus-list");
 
   Object.keys(Orchid.characteristics).forEach((characteristic) => {
-    if (characteristic === currentyCharacteristic) {
-      data[currentyCharacteristic].forEach((item) => {
+    if (characteristic === currentyCharacteristic && characteristics[currentyCharacteristic]) {
+      characteristics[currentyCharacteristic].forEach((item) => {
         const li = document.createElement("li");
         li.classList.add("genus-item");
 

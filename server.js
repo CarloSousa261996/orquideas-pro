@@ -3,6 +3,7 @@ import favicon from "serve-favicon";
 import path from "path";
 import { fileURLToPath } from "url";
 import orchidsRouter from "./routes/orchids.js";
+import characteristicsRouter from "./routes/characteristics.js";
 import initDatabase from "./api/config/init-db.js";
 
 const app = express();
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 // Routes
 
 app.use("/api/orchids", orchidsRouter);
+app.use("/api/characteristics", characteristicsRouter);
 
 app.get("/api", (req, res) => {
   res.json({ message: "Orquideas Pro API" });

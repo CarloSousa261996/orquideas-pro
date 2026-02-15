@@ -1,6 +1,6 @@
 import { Content } from "../components/content.js";
 import { Select } from "../components/select.js";
-import { data } from "../data.js";
+import { getAllCharacteristics } from "../helper/characteristics.js";
 import { navigateTo } from "../route.js";
 import { fetchJson } from "../helper/fetch.js";
 
@@ -11,36 +11,41 @@ import { fetchJson } from "../helper/fetch.js";
  * Se houver um erro, ele exibirá uma mensagem de erro em vez disso.
  * @returns {Content} Uma página com um formulário para editar a orquídea.
  */ 
-export function EditOrchidPage() {
-  const form = document.createElement("form");
-  form.classList.add("new-orchid-form");
-
+export async function EditOrchidPage() {
   const orchidId = new URLSearchParams(location.search).get("orchid-id");
-  const orchid = data.orchid.find((o) => o.id === parseInt(orchidId));
+  
+  try {
+    const [orchid, characteristics] = await Promise.all([
+      fetchJson(`/api/orchids/${orchidId}`),
+      getAllCharacteristics()
+    ]);
 
-  const inputDescription = document.createElement("input");
-  inputDescription.setAttribute("type", "text");
-  inputDescription.setAttribute("placeholder", "Descrição da Orquídea");
-  inputDescription.value = orchid.description;
+    const form = document.createElement("form");
+    form.classList.add("new-orchid-form");
 
-  const inputImage = document.createElement("input");
-  inputImage.setAttribute("type", "file");
-  inputImage.setAttribute("accept", "image/*");
-  inputImage.setAttribute("placeholder", "Selecionar imagem");
+    const inputDescription = document.createElement("input");
+    inputDescription.setAttribute("type", "text");
+    inputDescription.setAttribute("placeholder", "Descrição da Orquídea");
+    inputDescription.value = orchid.description;
 
-  const createBtn = document.createElement("button");
-  createBtn.classList.add("btn");
-  createBtn.textContent = "Salvar";
+    const inputImage = document.createElement("input");
+    inputImage.setAttribute("type", "file");
+    inputImage.setAttribute("accept", "image/*");
+    inputImage.setAttribute("placeholder", "Selecionar imagem");
 
-  form.appendChild(inputDescription);
-  form.appendChild(inputImage);
-  form.appendChild(Select(data.genus, "Género", orchid.genus));
-  form.appendChild(Select(data.type, "Tipo", orchid.type));
-  form.appendChild(Select(data.humidity, "Humidade", orchid.humidity));
-  form.appendChild(Select(data.temperature, "Temperatura", orchid.temperature));
-  form.appendChild(Select(data.size, "Tamanho", orchid.size));
-  form.appendChild(Select(data.luminosity, "Luminosidade", orchid.luminosity));
-  form.appendChild(createBtn);
+    const createBtn = document.createElement("button");
+    createBtn.classList.add("btn");
+    createBtn.textContent = "Salvar";
+
+    form.appendChild(inputDescription);
+    form.appendChild(inputImage);
+    form.appendChild(Select(characteristics.genus, "Género", orchid.genus_id));
+    form.appendChild(Select(characteristics.type, "Tipo", orchid.type_id));
+    form.appendChild(Select(characteristics.humidity, "Humidade", orchid.humidity_id));
+    form.appendChild(Select(characteristics.temperature, "Temperatura", orchid.temperature_id));
+    form.appendChild(Select(characteristics.size, "Tamanho", orchid.size_id));
+    form.appendChild(Select(characteristics.luminosity, "Luminosidade", orchid.luminosity_id));
+    form.appendChild(createBtn);
 
   form.addEventListener("submit", async (ev) => {
     ev.preventDefault();
@@ -69,5 +74,11 @@ export function EditOrchidPage() {
     }
   });
 
-  return Content("Editar Orquídea", form);
+    return Content("Editar Orquídea", form);
+  } catch (error) {
+    console.error("Erro ao carregar dados da orquídea:", error);
+    const errorDiv = document.createElement("div");
+    errorDiv.textContent = "Erro ao carregar dados da orquídea";
+    return Content("Erro", errorDiv);
+  }
 }
