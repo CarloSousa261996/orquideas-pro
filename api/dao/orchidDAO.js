@@ -1,8 +1,22 @@
 import pool from "../config/database.js";
 
 const ORCHID_SELECT_QUERY = `
-  SELECT o.*, g.description as genus, t.description as type, l.description as luminosity, 
-         te.description as temperature, h.description as humidity, s.description as size
+  SELECT 
+    o.id, 
+    o.description, 
+    o.image, 
+    g.id as genus_id, 
+    g.description AS genus_description, 
+    t.id as type_id, 
+    t.description AS type_description, 
+    l.id as luminosity_id, 
+    l.description AS luminosity_description, 
+    te.id as temperature_id, 
+    te.description AS temperature_description, 
+    h.id as humidity_id, 
+    h.description AS humidity_description, 
+    s.id as size_id, 
+    s.description AS size_description
   FROM orchid o
   JOIN genus g ON o.genus_id = g.id
   JOIN type t ON o.type_id = t.id
@@ -15,19 +29,19 @@ const ORCHID_SELECT_QUERY = `
 export class OrchidDAO {
   async findAll() {
     const [rows] = await pool.query(ORCHID_SELECT_QUERY);
-    return rows;
+    return rows.map(this.#toOrchidDTO);
   }
 
   async findById(id) {
     const [rows] = await pool.query(ORCHID_SELECT_QUERY + " WHERE o.id = ?", [id]);
-    return rows.length > 0 ? rows[0] : null;
+    return rows.length > 0 ? this.#toOrchidDTO(rows[0]) : null;
   }
 
   async create(description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image = null) {
     const [result] = await pool.query(
       `INSERT INTO orchid (description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image]
+      [description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image],
     );
     return result.insertId;
   }
@@ -37,7 +51,7 @@ export class OrchidDAO {
       `UPDATE orchid 
        SET description=?, genus_id=?, type_id=?, luminosity_id=?, temperature_id=?, humidity_id=?, size_id=?, image=?
        WHERE id=?`,
-      [description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image, id]
+      [description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image, id],
     );
     return result.affectedRows > 0;
   }
@@ -50,5 +64,20 @@ export class OrchidDAO {
   async updateImage(id, imagePath) {
     const [result] = await pool.query(`UPDATE orchid SET image=? WHERE id=?`, [imagePath, id]);
     return result.affectedRows > 0;
+  }
+
+  #toOrchidDTO(row) {
+    return Object.keys(row).reduce((dto, key) => {
+      const [entity, field] = key.split("_");
+      if (key.split("_").length === 2) {
+        dto[entity] = {
+          ...dto[entity],
+          [field]: row[key],
+        };
+        return dto;
+      }
+      dto[key] = row[key];
+      return dto;
+    }, {});
   }
 }

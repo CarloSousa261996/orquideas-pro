@@ -11,7 +11,6 @@ export async function getAllOrchids(req, res) {
     const orchids = await orchidService.getAll();
     res.json(orchids);
   } catch (err) {
-    /* eslint-disable-next-line no-unused-vars */
     res.status(500).json({ error: "Erro ao buscar orquídeas", details: err.message });
   }
 }
