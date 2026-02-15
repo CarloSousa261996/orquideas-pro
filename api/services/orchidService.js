@@ -36,6 +36,10 @@ export class OrchidService {
    * @returns {Promise<number>} Uma promessa que resolve com o ID da orquídea criada.
    */
   async create(description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image = null) {
+    const orchidExists = await this.#orchidDAO.findByDescription(description);
+    if (orchidExists) {
+      throw new Error("Orquídea com essa descrição já existe.");
+    }
     const result = await this.#orchidDAO.create(description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image);
     return result.insertId;
   }
@@ -57,6 +61,11 @@ export class OrchidService {
     const orchidExists = await this.#orchidDAO.findById(id);
     if (!orchidExists) {
       return false;
+    }
+
+    const duplicateOrchid = await this.#orchidDAO.findByDescription(description);
+    if (duplicateOrchid && duplicateOrchid.id !== id) {
+      throw new Error("Outra orquídea com essa descrição já existe.");
     }
     return this.#orchidDAO.update(id, description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image);
   }

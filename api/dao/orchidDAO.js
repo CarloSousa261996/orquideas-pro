@@ -72,6 +72,11 @@ export class OrchidDAO {
     return result.affectedRows > 0;
   }
 
+  async findByDescription(description) {
+    const [rows] = await pool.query(ORCHID_SELECT_QUERY + " WHERE o.description = ?", [description]);
+    return rows.length > 0 ? this.#toOrchidDTO(rows[0]) : null;
+  }
+
   #toOrchidDTO(row) {
     return Object.keys(row).reduce((dto, key) => {
       const [entity, field] = key.split("_");
