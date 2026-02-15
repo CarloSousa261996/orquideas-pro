@@ -27,11 +27,11 @@ export async function getCharacteristicsByType(req, res) {
   try {
     const { type } = req.params;
     const characteristics = await characteristicService.getCharacteristicsByType(type);
-    
+
     if (characteristics.length === 0) {
       return res.status(404).json({ error: "Tipo de característica não encontrado" });
     }
-    
+
     res.json(characteristics);
   } catch (err) {
     res.status(500).json({ error: "Erro ao buscar características", details: err.message });
