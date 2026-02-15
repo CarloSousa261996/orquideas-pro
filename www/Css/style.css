@@ -24,11 +24,13 @@
 html {
   height: 100%;
 }
+
 @keyframes slideLeft {
   0% {
     transform: translateX(5rem);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -1119,7 +1121,7 @@ footer .copyright {
   .iconClass {
     width: 3.2rem;
     height: 3.2rem;
-    font-size: 10.6rem;
+    font-size: 1.6rem;
   }
 
   .iconClass:not(:last-child) {
@@ -1570,7 +1572,7 @@ body {
   padding: 1rem;
   border: 0.1rem solid #ccc;
   border-radius: 0.8rem;
-  font-size: 10.6rem;
+  font-size: 1.6rem;
   font-family: "Segoe UI", sans-serif;
   color: var(--root-color);
   font-weight: bold;
@@ -1582,7 +1584,7 @@ body {
   border: none;
   padding: 1.2rem;
   border-radius: 0.8rem;
-  font-size: 10.6rem;
+  font-size: 1.6rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }

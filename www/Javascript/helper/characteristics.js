@@ -10,7 +10,7 @@ export async function getAllCharacteristics() {
   if (characteristicsCache) {
     return characteristicsCache;
   }
-  
+
   try {
     characteristicsCache = await fetchJson("/api/characteristics");
     return characteristicsCache;

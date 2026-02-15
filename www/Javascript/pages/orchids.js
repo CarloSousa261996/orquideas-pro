@@ -14,10 +14,7 @@ export async function OrchidPage() {
   const orchidCharacteristicId = parseInt(new URLSearchParams(location.search).get("characteristic-id")) || 1;
 
   try {
-    const [allOrchids, characteristics] = await Promise.all([
-      fetchJson("/api/orchids"),
-      getAllCharacteristics()
-    ]);
+    const [allOrchids, characteristics] = await Promise.all([fetchJson("/api/orchids"), getAllCharacteristics()]);
 
     const characteristic = characteristics[orchidCharacteristic].find((genus) => genus.id === orchidCharacteristicId);
     const orchids = allOrchids.filter((orchid) => orchid[`${orchidCharacteristic}_id`] === orchidCharacteristicId);

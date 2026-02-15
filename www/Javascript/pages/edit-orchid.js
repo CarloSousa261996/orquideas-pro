@@ -10,15 +10,12 @@ import { fetchJson } from "../helper/fetch.js";
  * Busca a orquídea da API com base no ID passado na URL e então cria uma página com um formulário para editar a orquídea.
  * Se houver um erro, ele exibirá uma mensagem de erro em vez disso.
  * @returns {Content} Uma página com um formulário para editar a orquídea.
- */ 
+ */
 export async function EditOrchidPage() {
   const orchidId = new URLSearchParams(location.search).get("orchid-id");
-  
+
   try {
-    const [orchid, characteristics] = await Promise.all([
-      fetchJson(`/api/orchids/${orchidId}`),
-      getAllCharacteristics()
-    ]);
+    const [orchid, characteristics] = await Promise.all([fetchJson(`/api/orchids/${orchidId}`), getAllCharacteristics()]);
 
     const form = document.createElement("form");
     form.classList.add("new-orchid-form");
@@ -47,32 +44,32 @@ export async function EditOrchidPage() {
     form.appendChild(Select(characteristics.luminosity, "Luminosidade", orchid.luminosity_id));
     form.appendChild(createBtn);
 
-  form.addEventListener("submit", async (ev) => {
-    ev.preventDefault();
+    form.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
 
-    const formData = new FormData();
-    formData.append("description", inputDescription.value);
-    formData.append("genus_id", parseInt(form.elements[2].value));
-    formData.append("type_id", parseInt(form.elements[3].value));
-    formData.append("humidity_id", parseInt(form.elements[4].value));
-    formData.append("temperature_id", parseInt(form.elements[5].value));
-    formData.append("size_id", parseInt(form.elements[6].value));
-    formData.append("luminosity_id", parseInt(form.elements[7].value));
+      const formData = new FormData();
+      formData.append("description", inputDescription.value);
+      formData.append("genus_id", parseInt(form.elements[2].value));
+      formData.append("type_id", parseInt(form.elements[3].value));
+      formData.append("humidity_id", parseInt(form.elements[4].value));
+      formData.append("temperature_id", parseInt(form.elements[5].value));
+      formData.append("size_id", parseInt(form.elements[6].value));
+      formData.append("luminosity_id", parseInt(form.elements[7].value));
 
-    if (inputImage.files.length > 0) {
-      formData.append("image", inputImage.files[0]);
-    }
+      if (inputImage.files.length > 0) {
+        formData.append("image", inputImage.files[0]);
+      }
 
-    try {
-      await fetchJson(`/api/orchids/${orchid.id}`, {
-        method: "PUT",
-        body: formData,
-      });
-      navigateTo(`?orchid-id=${orchid.id}`);
-    } catch (error) {
-      alert("Erro ao atualizar orquídea: " + error.message);
-    }
-  });
+      try {
+        await fetchJson(`/api/orchids/${orchid.id}`, {
+          method: "PUT",
+          body: formData,
+        });
+        navigateTo(`?orchid-id=${orchid.id}`);
+      } catch (error) {
+        alert("Erro ao atualizar orquídea: " + error.message);
+      }
+    });
 
     return Content("Editar Orquídea", form);
   } catch (error) {

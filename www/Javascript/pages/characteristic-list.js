@@ -12,9 +12,9 @@ import { navigateTo } from "../route.js";
  */
 export async function CharacteristicPage() {
   const currentyCharacteristic = new URLSearchParams(location.search).get("characteristic") || "genus";
-  
+
   const characteristics = await getAllCharacteristics();
-  
+
   const homeUl = document.createElement("ul");
   homeUl.classList.add("genus-list");
 

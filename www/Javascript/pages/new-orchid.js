@@ -11,7 +11,7 @@ import { fetchJson } from "../helper/fetch.js";
  */
 export async function NewOrchidPage() {
   const characteristics = await getAllCharacteristics();
-  
+
   const form = document.createElement("form");
   form.classList.add("new-orchid-form");
 
