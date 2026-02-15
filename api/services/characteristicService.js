@@ -2,7 +2,7 @@ import { CharacteristicDAO } from "../dao/characteristicDAO.js";
 
 export class CharacteristicService {
   #characteristicDAO;
-  
+
   constructor() {
     this.#characteristicDAO = new CharacteristicDAO();
   }
