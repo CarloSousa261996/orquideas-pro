@@ -16,13 +16,13 @@ export async function OrchidDetailsPage() {
   const orchid = new Orchid(
     orchidData.id,
     orchidData.description,
-    orchidData.genus_id,
-    orchidData.type_id,
-    orchidData.luminosity_id,
-    orchidData.temperature_id,
-    orchidData.humidity_id,
-    orchidData.size_id,
-    orchidData.image
+    orchidData.genus || orchidData.genus_id,
+    orchidData.type || orchidData.type_id,
+    orchidData.luminosity || orchidData.luminosity_id,
+    orchidData.temperature || orchidData.temperature_id,
+    orchidData.humidity || orchidData.humidity_id,
+    orchidData.size || orchidData.size_id,
+    orchidData.image,
   );
 
   const orchidInfoSection = document.createElement("section");

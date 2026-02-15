@@ -1,5 +1,4 @@
-import { data } from "../data.js";
-
+import { Characteristic } from "./characteristic.js";
 export class Orchid {
   #id;
   #description;
@@ -24,28 +23,23 @@ export class Orchid {
    * @param {string} src - URL da imagem.
    * @param {object} apiData - Dados opcionais da resposta da API.
    */
-  constructor(id, description, genusId, typeId, luminosityId, temperatureId, humidityId, sizeId, src, apiData = null) {
-    this.id = id;
+  constructor(id, description, genus, type, luminosity, temperature, humidity, size, src) {
+    this.#id = id;
     this.#description = description;
-
-    // If apiData is provided (from API response), use it directly
-    if (apiData) {
-      this.genus = { id: genusId, description: apiData.genus };
-      this.type = { id: typeId, description: apiData.type };
-      this.luminosity = { id: luminosityId, description: apiData.luminosity };
-      this.temperature = { id: temperatureId, description: apiData.temperature };
-      this.humidity = { id: humidityId, description: apiData.humidity };
-      this.size = { id: sizeId, description: apiData.size };
-    } else {
-      // Fallback to data.js for backward compatibility
-      this.genus = data.genus.find(({ id }) => id === genusId);
-      this.type = data.type.find(({ id }) => id === typeId);
-      this.luminosity = data.luminosity.find(({ id }) => id === luminosityId);
-      this.temperature = data.temperature.find(({ id }) => id === temperatureId);
-      this.humidity = data.humidity.find(({ id }) => id === humidityId);
-      this.size = data.size.find(({ id }) => id === sizeId);
-    }
+    this.#genus = Orchid.#toCharacteristic(genus);
+    this.#type = Orchid.#toCharacteristic(type);
+    this.#luminosity = Orchid.#toCharacteristic(luminosity);
+    this.#temperature = Orchid.#toCharacteristic(temperature);
+    this.#humidity = Orchid.#toCharacteristic(humidity);
+    this.#size = Orchid.#toCharacteristic(size);
     this.#src = src;
+  }
+
+  static #toCharacteristic(value) {
+    if (!value) return new Characteristic(null, "", null);
+    if (Array.isArray(value)) return new Characteristic(...value);
+    if (typeof value === "object") return new Characteristic(value.id, value.description, value.name ?? null);
+    return new Characteristic(value, "", null);
   }
 
   /**
@@ -54,6 +48,30 @@ export class Orchid {
    */
   get description() {
     return this.#description;
+  }
+
+  get genus() {
+    return this.#genus;
+  }
+
+  get type() {
+    return this.#type;
+  }
+
+  get luminosity() {
+    return this.#luminosity;
+  }
+
+  get temperature() {
+    return this.#temperature;
+  }
+
+  get humidity() {
+    return this.#humidity;
+  }
+
+  get size() {
+    return this.#size;
   }
 
   /**
@@ -80,8 +98,10 @@ export class Orchid {
     const orchidCharacteristicValue = document.createElement("span");
     orchidCharacteristicValue.textContent = this[characteristic].description;
 
-    if (DATA_RESTORE[characteristic]) {
-      orchidCharacteristicValue.classList.add(`${characteristic}-${DATA_RESTORE[characteristic].find(({ id }) => id === this[characteristic].id).description}`);
+    const characteristicName = this[characteristic].name || Orchid.getCharacteristicName(characteristic, this[characteristic].id);
+
+    if (characteristicName) {
+      orchidCharacteristicValue.classList.add(`${characteristic}-${characteristicName}`);
     }
 
     orchidCharacteristicValue.classList.add(characteristic);
@@ -89,17 +109,23 @@ export class Orchid {
     return orchidCharacteristicValue;
   }
 
-/**
- * Retorna um nome de classe CSS que representa uma característica da orquídea.
- * O nome da classe está no formato "{característica}-{descrição}".
- * Se a característica não for encontrada em DATA_RESTORE, retorna "none".
- * @param {string} characteristic - O nome da característica.
- * @param {number} characteristicId - O ID da característica.
- * @returns {string} Um nome de classe CSS que representa uma característica da orquídea.
- */
+  /**
+   * Retorna um nome de classe CSS que representa uma característica da orquídea.
+   * O nome da classe está no formato "{característica}-{descrição}".
+   * Se a característica não for encontrada em DATA_RESTORE, retorna "none".
+   * @param {string} characteristic - O nome da característica.
+   * @param {number} characteristicId - O ID da característica.
+   * @returns {string} Um nome de classe CSS que representa uma característica da orquídea.
+   */
   static getCharacteristicClass(characteristic, characteristicId) {
-    if (!DATA_RESTORE[characteristic]) return "none";
-    return `${characteristic}-${DATA_RESTORE[characteristic].find(({ id }) => id === characteristicId).description}`;
+    const characteristicName = Orchid.getCharacteristicName(characteristic, characteristicId);
+    if (!characteristicName) return "none";
+    return `${characteristic}-${characteristicName}`;
+  }
+
+  static getCharacteristicName(characteristic, characteristicId) {
+    if (!DATA_RESTORE[characteristic]) return null;
+    return DATA_RESTORE[characteristic].find(({ id }) => id === characteristicId)?.name || null;
   }
 
   /**
@@ -139,31 +165,31 @@ export class Orchid {
 
 const DATA_RESTORE = {
   type: [
-    { id: 1, description: "species" },
-    { id: 2, description: "hybrid" },
+    { id: 1, name: "species" },
+    { id: 2, name: "hybrid" },
   ],
   luminosity: [
-    { id: 1, description: "full-shade" },
-    { id: 2, description: "shaded-light" },
-    { id: 3, description: "filtered-light" },
-    { id: 4, description: "strong-light" },
+    { id: 1, name: "full-shade" },
+    { id: 2, name: "shaded-light" },
+    { id: 3, name: "filtered-light" },
+    { id: 4, name: "strong-light" },
   ],
   temperature: [
-    { id: 1, description: "cold" },
-    { id: 2, description: "seasoned" },
-    { id: 3, description: "hot" },
-    { id: 4, description: "very-hot" },
+    { id: 1, name: "cold" },
+    { id: 2, name: "seasoned" },
+    { id: 3, name: "hot" },
+    { id: 4, name: "very-hot" },
   ],
   humidity: [
-    { id: 1, description: "lt40" },
-    { id: 2, description: "40-60" },
-    { id: 3, description: "60-80" },
-    { id: 4, description: "gt80" },
+    { id: 1, name: "lt40" },
+    { id: 2, name: "40-60" },
+    { id: 3, name: "60-80" },
+    { id: 4, name: "gt80" },
   ],
   size: [
-    { id: 1, description: "miniature" },
-    { id: 2, description: "small" },
-    { id: 3, description: "medium" },
-    { id: 4, description: "big" },
+    { id: 1, name: "miniature" },
+    { id: 2, name: "small" },
+    { id: 3, name: "medium" },
+    { id: 4, name: "big" },
   ],
 };

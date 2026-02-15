@@ -25,10 +25,13 @@ export function CharacteristicPage() {
         const descriptionEl = document.createElement("p");
         descriptionEl.textContent = item.description;
         li.classList.add("genus-link");
-        li.classList.add(Orchid.getCharacteristicClass(currentyCharacteristic, item.id));
+        const characteristicClass = item.name ? `${currentyCharacteristic}-${item.name}` : Orchid.getCharacteristicClass(currentyCharacteristic, item.id);
+        if (characteristicClass) {
+          li.classList.add(characteristicClass);
+        }
 
         if (currentyCharacteristic === "genus") {
-          li.setAttribute("id", item.description.toLocaleLowerCase());
+          li.setAttribute("id", item.name || item.description.toLocaleLowerCase());
         }
 
         li.appendChild(descriptionEl);

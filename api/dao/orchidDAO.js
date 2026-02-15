@@ -7,16 +7,22 @@ const ORCHID_SELECT_QUERY = `
     o.image, 
     g.id as genus_id, 
     g.description AS genus_description, 
+    g.name AS genus_name,
     t.id as type_id, 
     t.description AS type_description, 
+    t.name AS type_name,
     l.id as luminosity_id, 
     l.description AS luminosity_description, 
+    l.name AS luminosity_name,
     te.id as temperature_id, 
     te.description AS temperature_description, 
+    te.name AS temperature_name,
     h.id as humidity_id, 
     h.description AS humidity_description, 
+    h.name AS humidity_name,
     s.id as size_id, 
-    s.description AS size_description
+    s.description AS size_description,
+    s.name AS size_name
   FROM orchid o
   JOIN genus g ON o.genus_id = g.id
   JOIN type t ON o.type_id = t.id
