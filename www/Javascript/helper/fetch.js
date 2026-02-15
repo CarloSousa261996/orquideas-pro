@@ -31,7 +31,7 @@ export async function fetchJson(url, options = {}) {
     const response = await fetch(url, defaultOptions);
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ error: response.statusText }));
-      throw new Error(errorData.error || `HTTP ${response.status}`);
+      throw errorData;
     }
     return await response.json();
   } catch (error) {

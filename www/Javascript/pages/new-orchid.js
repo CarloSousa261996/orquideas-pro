@@ -55,18 +55,13 @@ export async function NewOrchidPage() {
     }
 
     try {
-      const result = await fetchJson("/api/orchids", {
+      await fetchJson("/api/orchids", {
         method: "POST",
         body: formData,
       });
-      if (result && result.id) {
-        navigateTo(`?characteristic=all`);
-      } else {
-        alert("Erro ao cadastrar orquídea.");
-      }
+      navigateTo(`?characteristic=all`);
     } catch (err) {
-      console.error("Error:", err);
-      alert("Erro ao cadastrar orquídea: " + err.message);
+      alert(err.details || err.message || "Erro ao criar orquídea");
     }
   });
 
