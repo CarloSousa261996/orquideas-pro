@@ -36,12 +36,12 @@ export async function EditOrchidPage() {
 
     form.appendChild(inputDescription);
     form.appendChild(inputImage);
-    form.appendChild(Select(characteristics.genus, "Género", orchid.genus_id));
-    form.appendChild(Select(characteristics.type, "Tipo", orchid.type_id));
-    form.appendChild(Select(characteristics.humidity, "Humidade", orchid.humidity_id));
-    form.appendChild(Select(characteristics.temperature, "Temperatura", orchid.temperature_id));
-    form.appendChild(Select(characteristics.size, "Tamanho", orchid.size_id));
-    form.appendChild(Select(characteristics.luminosity, "Luminosidade", orchid.luminosity_id));
+    form.appendChild(Select(characteristics.genus, "Género", orchid.genus.id));
+    form.appendChild(Select(characteristics.type, "Tipo", orchid.type.id));
+    form.appendChild(Select(characteristics.humidity, "Humidade", orchid.humidity.id));
+    form.appendChild(Select(characteristics.temperature, "Temperatura", orchid.temperature.id));
+    form.appendChild(Select(characteristics.size, "Tamanho", orchid.size.id));
+    form.appendChild(Select(characteristics.luminosity, "Luminosidade", orchid.luminosity.id));
     form.appendChild(createBtn);
 
     form.addEventListener("submit", async (ev) => {

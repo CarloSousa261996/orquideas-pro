@@ -13,12 +13,8 @@ export const Select = (options, labelText = "selecione", selectedValue, placehol
   const placeholderOption = document.createElement("option");
   placeholderOption.textContent = placeholder;
   placeholderOption.disabled = true;
-  placeholderOption.selected = true;
+  placeholderOption.selected = selectedValue === undefined;
   select.appendChild(placeholderOption);
-
-  if (selectedValue !== undefined) {
-    select.value = selectedValue;
-  }
 
   const div = document.createElement("div");
   div.classList.add("select");
@@ -34,6 +30,10 @@ export const Select = (options, labelText = "selecione", selectedValue, placehol
 
     select.appendChild(option);
   });
+
+  if (selectedValue !== undefined) {
+    select.value = selectedValue;
+  }
 
   div.appendChild(select);
   return div;
