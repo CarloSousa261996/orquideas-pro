@@ -55,10 +55,14 @@ export class OrchidDAO {
   async update(id, description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image = null) {
     const [result] = await pool.query(
       `UPDATE orchid 
-       SET description=?, genus_id=?, type_id=?, luminosity_id=?, temperature_id=?, humidity_id=?, size_id=?, image=?
+       SET description=?, genus_id=?, type_id=?, luminosity_id=?, temperature_id=?, humidity_id=?, size_id=?
        WHERE id=?`,
-      [description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image, id],
+      [description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, id],
     );
+
+    if (image) {
+      await pool.query(`UPDATE orchid SET image=? WHERE id=?`, [image, id]);
+    }
     return result.affectedRows > 0;
   }
 

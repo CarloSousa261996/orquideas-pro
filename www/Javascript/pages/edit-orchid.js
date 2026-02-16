@@ -30,6 +30,16 @@ export async function EditOrchidPage() {
     inputImage.setAttribute("accept", "image/*");
     inputImage.setAttribute("placeholder", "Selecionar imagem");
 
+    if (orchid.image) {
+      const imgPreview = document.createElement("img");
+      imgPreview.src = orchid.image;
+      imgPreview.height = 200;
+      imgPreview.style.objectFit = "cover";
+      imgPreview.alt = "Imagem atual da orquídea";
+      imgPreview.classList.add("orchid-image-preview");
+      form.appendChild(imgPreview);
+    }
+
     const createBtn = document.createElement("button");
     createBtn.classList.add("btn");
     createBtn.textContent = "Salvar";
