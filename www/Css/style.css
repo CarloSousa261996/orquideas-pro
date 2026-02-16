@@ -540,7 +540,6 @@ footer {
   width: 100%;
   margin-top: auto;
   margin-bottom: 1rem;
-  padding: var(--root-space);
   color: var(--root-background-color);
   background-color: var(--root-color);
   border-radius: var(--root-border-radius);
@@ -1355,7 +1354,6 @@ footer .copyright {
   }
 
   footer {
-    padding: 2rem;
     font-size: 1.6rem;
   }
 

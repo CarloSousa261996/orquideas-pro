@@ -7,40 +7,27 @@ import { Logo } from "./logo.js";
 export function Footer() {
   const footer = document.createElement("footer");
 
-  footer.appendChild(Logo());
+  const cta = document.createElement("section");
+  cta.classList.add("cta-section");
 
-  const utilsLink = [
-    { label: "GitHub", url: "https://github.com", iconClass: "fa-brands fa-github" },
-    { label: "LinkedIn", url: "https://www.linkedin.com", iconClass: "fa-brands fa-linkedin" },
-    { label: "Twitter", url: "https://twitter.com", iconClass: "fa-brands fa-twitter" },
-    { label: "Facebook", url: "https://www.facebook.com", iconClass: "fa-brands fa-facebook" },
-  ];
+  const ctaInner = document.createElement("div");
+  ctaInner.classList.add("cta-inner");
 
-  const footerLink = document.createElement("div");
-  footerLink.classList.add("footer-links");
+  const ctaTitle = document.createElement("h3");
+  ctaTitle.textContent = "Explore o mundo das orquídeas e";
 
-  utilsLink.forEach((item) => {
-    const a = document.createElement("a");
-    a.href = item.url;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    a.setAttribute("aria-label", item.label);
-    a.title = item.label;
+  const ctaText = document.createElement("p");
+  ctaText.textContent = "encontre a espécie perfeita para sua casa ou jardim.";
 
-    const icon = document.createElement("i");
-    icon.className = item.iconClass;
-    icon.style.fontSize = "24px";
-    icon.style.margin = "0 10px";
-    icon.classList.add("iconClass");
-    a.appendChild(icon);
-    footerLink.appendChild(a);
-  });
+  const ctaButton = document.createElement("button");
+  ctaButton.classList.add("btn", "cta-btn");
+  ctaButton.textContent = "Contacte-nos";
 
-  const copyright = document.createElement("p");
-  copyright.textContent = "About © Tecnologia Setúbal • Programação Web";
-  copyright.classList.add("copyright");
+  ctaInner.appendChild(ctaTitle);
+  ctaInner.appendChild(ctaText);
+  ctaInner.appendChild(ctaButton);
+  cta.appendChild(ctaInner);
 
-  footer.appendChild(footerLink);
-  footer.appendChild(copyright);
+  footer.appendChild(cta);
   return footer;
 }
