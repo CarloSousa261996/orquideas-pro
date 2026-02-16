@@ -13,6 +13,14 @@ export const Header = () => {
   const nav = document.createElement("nav");
   const navUl = document.createElement("ul");
 
+  const menuToggle = document.createElement("button");
+  menuToggle.classList.add("menu-toggle");
+  menuToggle.textContent = "☰";
+
+  menuToggle.addEventListener("click", () => {
+    header.classList.toggle("menu-open");
+  });
+
   const navItens = [
     {
       label: "Gênero",
@@ -49,6 +57,9 @@ export const Header = () => {
     li.textContent = item.label;
     li.setAttribute("id", item.value);
     li.addEventListener("click", () => navigateTo(`?characteristic=${item.value}`));
+    li.addEventListener("click", () => {
+      header.classList.remove("menu-open");
+    });
 
     navUl.appendChild(li);
   });
@@ -64,6 +75,13 @@ export const Header = () => {
 
   header.appendChild(logo);
   header.appendChild(nav);
+  header.appendChild(menuToggle);
+
+  window.addEventListener("click", (event) => {
+    if (header.classList.contains("menu-open") && !header.contains(event.target) && event.target !== menuToggle) {
+      header.classList.remove("menu-open");
+    }
+  });
 
   return header;
 };

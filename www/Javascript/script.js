@@ -15,16 +15,8 @@ import { CharacteristicPage } from "./pages/characteristic-list.js";
 async function init() {
   const main = document.createElement("main");
   main.classList.add("container");
-  const menuToggle = document.createElement("button");
-  menuToggle.classList.add("menu-toggle");
-  menuToggle.textContent = "☰";
 
   const headerEl = Header();
-
-  headerEl.insertBefore(menuToggle, headerEl.children[1] || null);
-  menuToggle.addEventListener("click", () => {
-    headerEl.classList.toggle("menu-open");
-  });
 
   main.appendChild(headerEl);
   main.appendChild(await CharacteristicPage());
