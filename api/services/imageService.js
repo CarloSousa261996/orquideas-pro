@@ -12,16 +12,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * Processa o upload de uma imagem e a renomeia com base no ID da orquídea.
- * Gera um thumbnail da imagem e o retorna como uma URL relativa à pasta de imagens.
+ * Apenas salva a imagem original, sem gerar thumbnail.
  * @param {Express.Multer.File} file - O arquivo de imagem a ser processado.
  * @param {number} orchidId - O ID da orquídea a qual a imagem pertence.
- * @returns {Promise<{imagePath: string, thumbnailPath: string}>} Uma promessa que resolve com um objeto contendo a URL da imagem e do thumbnail.
+ * @returns {Promise<{imagePath: string}>} Uma promessa que resolve com um objeto contendo a URL da imagem.
  */
 export async function processUploadedImage(file, orchidId) {
-  if (!file) return { imagePath: null, thumbnailPath: null };
+  if (!file) return { imagePath: null };
 
   // Renomear o arquivo com base no ID da orquídea
-  // Gerar o thumbnail
   const ext = path.extname(file.originalname);
   // Renomear o arquivo
   const newFilename = `${orchidId}${ext}`;
@@ -31,9 +30,41 @@ export async function processUploadedImage(file, orchidId) {
   fs.renameSync(oldPath, newPath);
   const imagePath = `/images/orchids/${newFilename}`;
 
-  const thumbnailPath = await generateThumbnail(newPath);
+  return { imagePath };
+}
 
-  return { imagePath, thumbnailPath };
+/**
+ * Gera um thumbnail para uma imagem se ele não existir.
+ * @param {string} imagePath - URL da imagem (ex: "/images/orchids/1.jpg")
+ * @returns {Promise<string|null>} URL do thumbnail ou null se houver erro
+ */
+export async function ensureThumbnail(imagePath) {
+  if (!imagePath) return null;
+
+  try {
+    const fullImagePath = path.join(path.dirname(fileURLToPath(import.meta.url)), "../../www", imagePath);
+    const filename = path.basename(imagePath);
+    const thumbDir = path.join(path.dirname(fileURLToPath(import.meta.url)), "../../www/images/orchids/thumbs");
+    const thumbPath = path.join(thumbDir, filename);
+
+    // Verifica se o thumbnail já existe
+    if (fs.existsSync(thumbPath)) {
+      return `/images/orchids/thumbs/${filename}`;
+    }
+
+    // Verifica se a imagem original existe
+    if (!fs.existsSync(fullImagePath)) {
+      console.warn("Imagem original não encontrada:", fullImagePath);
+      return null;
+    }
+
+    // Gera o thumbnail
+    const thumbnailUrl = await generateThumbnail(fullImagePath);
+    return thumbnailUrl;
+  } catch (error) {
+    console.error("Erro ao processar thumbnail para", imagePath, ":", error.message);
+    return null;
+  }
 }
 
 /**

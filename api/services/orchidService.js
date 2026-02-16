@@ -58,6 +58,7 @@ export class OrchidService {
    * @returns {Promise<boolean>} Uma promessa que resolve com true se a orquídea for atualizada com sucesso, ou false caso contrário.
    */
   async update(id, description, genus_id, type_id, luminosity_id, temperature_id, humidity_id, size_id, image = null) {
+    id = Number(id);
     const orchidExists = await this.#orchidDAO.findById(id);
     if (!orchidExists) {
       return false;

@@ -18,22 +18,32 @@ export async function generateThumbnail(imagePath) {
     const filename = path.basename(imagePath);
     const thumbDir = path.join(dir, "thumbs");
 
+    // Extrair o tipo da orquídea a partir do caminho
+    const pathParts = dir.split(path.sep);
+    const orchidTypeIndex = pathParts.findIndex((part) => part === "orchids");
+    const orchidType = orchidTypeIndex >= 0 && orchidTypeIndex < pathParts.length - 1 ? pathParts[orchidTypeIndex + 1] : "";
+
     if (!fs.existsSync(thumbDir)) {
       fs.mkdirSync(thumbDir, { recursive: true });
     }
 
     const thumbPath = path.join(thumbDir, filename);
 
-    await sharp(imagePath)
+    // Usar configurações tolerantes para lidar com JPEGs problemáticos
+    await sharp(imagePath, { failOnError: false })
+      .jpeg({ quality: 80, progressive: false, mozjpeg: false, force: true })
       .resize(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT, {
         fit: "cover",
         position: "center",
+        withoutEnlargement: false,
       })
       .toFile(thumbPath);
 
-    return `/images/orchids/thumbs/${filename}`;
+    const thumbnailUrl = orchidType ? `/images/orchids/${orchidType}/thumbs/${filename}` : `/images/orchids/thumbs/${filename}`;
+
+    return thumbnailUrl;
   } catch (err) {
-    console.error("Erro ao gerar thumbnail:", err);
+    console.error("Erro ao gerar thumbnail para", imagePath, ":", err.message);
     return null;
   }
 }
