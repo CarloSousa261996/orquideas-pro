@@ -3,7 +3,6 @@ import { EditOrchidPage } from "./pages/edit-orchid.js";
 import { NewOrchidPage } from "./pages/new-orchid.js";
 import { OrchidListPage } from "./pages/orchid-list.js";
 import { OrchidDetailsPage } from "./pages/orchids-details.js";
-import { OrchidPage } from "./pages/orchids.js";
 import { AboutPage } from "./pages/about.js";
 
 /**
@@ -17,7 +16,7 @@ export async function navigateTo(url) {
   const currentyContent = main.getElementsByClassName("content")[0];
 
   if (new URLSearchParams(location.search).get("characteristic") === "all") {
-    main.replaceChild(OrchidListPage(), currentyContent);
+    main.replaceChild(await OrchidListPage(), currentyContent);
   }
 
   if (new URLSearchParams(location.search).get("orchid-id") && new URLSearchParams(location.search).get("edit")) {
@@ -29,7 +28,7 @@ export async function navigateTo(url) {
   }
 
   if (new URLSearchParams(location.search).get("characteristic-id")) {
-    main.replaceChild(await OrchidPage(), currentyContent);
+    main.replaceChild(await OrchidListPage(), currentyContent);
   }
 
   if (new URLSearchParams(location.search).get("orchid-id")) {

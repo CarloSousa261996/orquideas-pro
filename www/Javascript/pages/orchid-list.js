@@ -1,6 +1,9 @@
 import { Content } from "../components/content.js";
 import { fetchJson } from "../helper/fetch.js";
 import { navigateTo } from "../route.js";
+import { Orchid } from "../models/orchid.js";
+import { getCharacteristicsByType } from "../helper/characteristics.js";
+import { getCharacteristicName } from "../helper/get-characteristic-name.js";
 
 /**
  * Retorna uma página com uma lista de orquídeas.
@@ -12,28 +15,43 @@ export function OrchidListPage() {
   const orchidList = document.createElement("div");
   orchidList.classList.add("orchid-list");
 
-  fetchJson("/api/orchids")
-    .then((orchids) => {
+  const characteristic = new URLSearchParams(location.search).get("characteristic");
+  const characteristicId = parseInt(new URLSearchParams(location.search).get("characteristic-id"));
+
+  const pageFilted = characteristic && characteristicId;
+  let title = "Lista de Orquídeas";
+  return fetchJson("/api/orchids")
+    .then(async (orchids) => {
+      if (pageFilted) {
+        orchids = orchids.filter((orchid) => orchid[characteristic].id === characteristicId);
+        const characteristicFound = (await getCharacteristicsByType(characteristic)).find(({ id }) => id === characteristicId);
+        title = `Orquídeas com ${getCharacteristicName(characteristic)}: ${characteristicFound ? characteristicFound.description : "Desconhecido"}`;
+      }
+
       if (orchids && orchids.length > 0) {
         orchids.forEach((orchid) => {
           const orchidItem = createOrchidItem(orchid);
           orchidList.appendChild(orchidItem);
         });
       }
+
+      return Content(title, orchidList);
     })
     .catch((error) => {
       console.error("Erro ao carregar orquídeas:", error);
-      orchidList.innerHTML = "<p>Erro ao carregar orquídeas</p>";
-    });
+      const errorMessage = document.createElement("p");
+      errorMessage.textContent = "Erro ao carregar orquídeas. Por favor, tente novamente mais tarde.";
+      orchidList.appendChild(errorMessage);
 
-  return Content("Lista de Orquídeas", orchidList);
+      return Content("Lista de Orquídeas", orchidList);
+    });
 }
 
 /**
  * Cria um item da lista de orquídeas com as informações da orquídea e botões para ver detalhes, editar e excluir.
  * @param {Orchid} orchid - A orquídea a ser renderizada.
  * @returns {HTMLElement} Um item da lista de orquídeas com as informações da orquídea e botões para ver detalhes, editar e excluir.
-*/
+ */
 function createOrchidItem(orchid) {
   const item = document.createElement("div");
   item.classList.add("orchid-item");
