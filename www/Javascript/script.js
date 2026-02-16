@@ -1,7 +1,6 @@
 import { Footer } from "./components/footer.js";
 import { Header } from "./components/header.js";
 import { CharacteristicPage } from "./pages/characteristic-list.js";
-import { RegisterModal } from "./components/register-modal.js";
 
 /**
  * Inicializa a página web com um header, um main
@@ -31,21 +30,6 @@ async function init() {
   main.appendChild(await CharacteristicPage());
   main.appendChild(Footer());
   document.body.appendChild(main);
-
-  const registerModal = RegisterModal();
-  registerModal.classList.add("hidden");
-  document.body.appendChild(registerModal);
-
-  /**
-   * Abre o modal de registro.
-   *
-   * @function openRegisterModal
-   * @example
-   * window.openRegisterModal();
-   */
-  window.openRegisterModal = () => {
-    registerModal.classList.remove("hidden");
-  };
 
   /**
    * Fechar o menu se a janela tiver mais de 760px de
